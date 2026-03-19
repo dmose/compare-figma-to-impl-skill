@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "firefox-devtools": {
+      "command": "./bin/firefox-devtools-mcp.sh",
+      "args": []
+    }
+  }
+}
