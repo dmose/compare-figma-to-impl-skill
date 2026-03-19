@@ -1,0 +1,27 @@
+{
+  "skill_name": "compare-figma-to-impl",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Compare the AI Window header to the Figma design at figma.com/design/abc123/ai-window?node-id=1-42",
+      "expected_output": "A structured comparison report without a separate 'Styling Details' section — styling info should be integrated into the Layout & Structure section",
+      "files": ["evals/samples/report-without-styling-details.md"],
+      "expectations": [
+        "The report does NOT contain a section headed 'Styling Details'",
+        "The report contains a 'Layout & Structure' section",
+        "The report contains a 'Summary of Discrepancies' section"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Compare the smartbar dropdown to the Figma mock at figma.com/design/xyz789/smartbar?node-id=3-17",
+      "expected_output": "A structured comparison report without a separate 'Styling Details' section",
+      "files": ["evals/samples/report-with-styling-details.md"],
+      "expectations": [
+        "The report does NOT contain a section headed 'Styling Details'",
+        "The report contains a 'Layout & Structure' section",
+        "The report contains a 'Summary of Discrepancies' section"
+      ]
+    }
+  ]
+}
