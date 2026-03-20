@@ -1,7 +1,7 @@
 #!/bin/bash
 # Run the compare-figma-to-impl skill via claude -p, then grade the output.
 #
-# Usage: ./run-eval.sh <prompt>
+# Usage: ./run-eval.sh [prompt]
 # Example: ./run-eval.sh "Compare the AI Window header to the Figma design at figma.com/design/abc123/ai-window?node-id=1-42"
 #
 # Prerequisites:
@@ -20,13 +20,10 @@ REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 OUTPUT_DIR="$REPO_ROOT/figma-impl-compare"
 REPORT_FILE="$OUTPUT_DIR/report.md"
 
-if [ $# -eq 0 ]; then
-  echo "Usage: $0 <prompt>"
-  echo "Example: $0 \"Compare the AI Window header to the Figma design at figma.com/design/abc123/...\""
-  exit 1
-fi
+DEFAULT_PROMPT='Compare the four icon buttons in the top left corner of the firefox main window to
+@https://www.figma.com/design/5KuePTGmOEUFyCHBHCsGim/AI-Mode-%E2%80%94%C2%A0MVP-Scope-Design?node-id=8559-44226&m=dev'
 
-PROMPT="$1"
+PROMPT="${1:-$DEFAULT_PROMPT}"
 
 # Clean up any previous run
 rm -rf "$OUTPUT_DIR"
