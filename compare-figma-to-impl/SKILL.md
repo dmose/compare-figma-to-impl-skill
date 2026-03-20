@@ -30,7 +30,8 @@ comparison covering layout, structure, and styling.
 ### Phase 1: Gather Figma Spec
 
 1. Call `mcp__plugin_figma_figma-desktop__get_screenshot` to capture the
-   design visually. Always do this — it's the ground truth.
+   design visually. Always do this — it's the ground truth. Save the
+   screenshot to `comparison/figma-screenshot.png`.
 2. Call `mcp__plugin_figma_figma-desktop__get_design_context` with
    `forceCode: true` to get the generated code and style tokens.
 3. Extract from the Figma output:
@@ -126,8 +127,9 @@ See `references/comparison-checklist.md` for a reusable script.
 
 After capturing both screenshots (Figma in Phase 1, live page via
 `mcp__firefox-devtools__screenshot_page` or
-`mcp__firefox-devtools__screenshot_by_uid` in Phase 2), **compare them
-visually before proceeding to numerical comparison**.
+`mcp__firefox-devtools__screenshot_by_uid` in Phase 2), save the
+implementation screenshot to `comparison/impl-screenshot.png`, then
+**compare them visually before proceeding to numerical comparison**.
 
 Look for obvious differences that CSS property extraction might miss:
 - Wrong or missing icons (different icon shape, generic fallback)
@@ -224,7 +226,16 @@ positioning, flex/grid), styling (colors, borders, typography, shadows,
 opacity) — between Figma and implementation.
 
 ## Summary of Discrepancies
-Categorize each finding as Critical, Minor, or Non-issue.
+Immediately after this heading, include the Figma and implementation
+screenshots side by side in a table, using relative paths:
+
+```
+| Figma | Implementation |
+|:---:|:---:|
+| ![Figma screenshot](comparison/figma-screenshot.png) | ![Implementation screenshot](comparison/impl-screenshot.png) |
+```
+
+Then categorize each finding as Critical, Minor, or Non-issue.
 
 If the user asks for a plan to fix, add a Changes section with specific
 file paths, line numbers, and code snippets using design tokens where

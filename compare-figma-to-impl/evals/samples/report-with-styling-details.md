@@ -40,6 +40,10 @@ against the live Firefox implementation at `browser.xhtml > ai-window`.
 
 ## Summary of Discrepancies
 
+| Figma | Implementation |
+|:---:|:---:|
+| ![Figma screenshot](comparison/figma-screenshot.png) | ![Implementation screenshot](comparison/impl-screenshot.png) |
+
 ### Critical
 None.
 

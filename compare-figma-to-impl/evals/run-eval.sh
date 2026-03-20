@@ -1,8 +1,11 @@
 #!/bin/bash
 # Run the compare-figma-to-impl skill via claude -p, then grade the output.
 #
-# Usage: ./run-eval.sh [prompt]
+# Usage: ./run-eval.sh [-g] [prompt]
+#   -g    Grade only: skip running the skill and grade the existing comparison/ directory
+#
 # Example: ./run-eval.sh "Compare the AI Window header to the Figma design at figma.com/design/abc123/ai-window?node-id=1-42"
+# Example: ./run-eval.sh -g
 #
 # Prerequisites:
 #   - Firefox is open with the target UI visible
@@ -11,31 +14,43 @@
 # What this checks:
 #   1. The skill creates a comparison/ directory
 #   2. The skill saves a report.md file in that directory
-#   3. The report passes all content assertions (no "Styling Details" section, etc.)
+#   3. figma-screenshot.png exists in the output directory
+#   4. impl-screenshot.png exists in the output directory
+#   5. The report passes all content assertions (no "Styling Details" section, etc.)
 
 set -euo pipefail
+
+GRADE_ONLY=false
+if [ "${1:-}" = "-g" ]; then
+  GRADE_ONLY=true
+  shift
+fi
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
 OUTPUT_DIR="$REPO_ROOT/comparison"
 REPORT_FILE="$OUTPUT_DIR/report.md"
 
-DEFAULT_PROMPT='Compare the four icon buttons in the top left corner of the firefox main window to
+if [ "$GRADE_ONLY" = false ]; then
+  DEFAULT_PROMPT='Compare the four icon buttons in the top left corner of the firefox main window to
 @https://www.figma.com/design/5KuePTGmOEUFyCHBHCsGim/AI-Mode-%E2%80%94%C2%A0MVP-Scope-Design?node-id=8559-44226&m=dev'
 
-PROMPT="${1:-$DEFAULT_PROMPT}"
+  PROMPT="${1:-$DEFAULT_PROMPT}"
 
-# Clean up any previous run
-rm -rf "$OUTPUT_DIR"
-mkdir -p "$OUTPUT_DIR"
+  # Clean up any previous run
+  rm -rf "$OUTPUT_DIR"
+  mkdir -p "$OUTPUT_DIR"
 
-echo "=== Running skill via claude -p ==="
-echo "Prompt: $PROMPT"
-echo ""
+  echo "=== Running skill via claude -p ==="
+  echo "Prompt: $PROMPT"
+  echo ""
 
-(cd "$REPO_ROOT" && echo "$PROMPT" | claude -p --verbose --output-format stream-json \
-  --allowedTools "Bash Write Read Edit Glob Grep Skill mcp__plugin_figma_figma__get_design_context mcp__plugin_figma_figma__get_screenshot mcp__plugin_figma_figma__get_metadata mcp__firefox-devtools__take_snapshot mcp__firefox-devtools__screenshot_page mcp__firefox-devtools__screenshot_by_uid mcp__firefox-devtools__evaluate_script mcp__firefox-devtools__list_pages mcp__firefox-devtools__select_page" \
-  ) | tee "$OUTPUT_DIR/claude-output.txt"
+  (cd "$REPO_ROOT" && echo "$PROMPT" | claude -p --verbose --output-format stream-json \
+    --allowedTools "Bash Write Read Edit Glob Grep Skill mcp__plugin_figma_figma__get_design_context mcp__plugin_figma_figma__get_screenshot mcp__plugin_figma_figma__get_metadata mcp__firefox-devtools__take_snapshot mcp__firefox-devtools__screenshot_page mcp__firefox-devtools__screenshot_by_uid mcp__firefox-devtools__evaluate_script mcp__firefox-devtools__list_pages mcp__firefox-devtools__select_page" \
+    ) | tee "$OUTPUT_DIR/claude-output.txt"
+else
+  echo "=== Grade-only mode: using existing comparison/ directory ==="
+fi
 
 echo ""
 echo "=== Checking output ==="
@@ -64,7 +79,27 @@ else
   fail=$((fail + 1))
 fi
 
-# Check 3: Grade the report content (if it exists)
+# Check 3: figma-screenshot.png exists
+total=$((total + 1))
+if [ -f "$OUTPUT_DIR/figma-screenshot.png" ]; then
+  echo "  PASS: figma-screenshot.png exists"
+  pass=$((pass + 1))
+else
+  echo "  FAIL: figma-screenshot.png was not created"
+  fail=$((fail + 1))
+fi
+
+# Check 4: impl-screenshot.png exists
+total=$((total + 1))
+if [ -f "$OUTPUT_DIR/impl-screenshot.png" ]; then
+  echo "  PASS: impl-screenshot.png exists"
+  pass=$((pass + 1))
+else
+  echo "  FAIL: impl-screenshot.png was not created"
+  fail=$((fail + 1))
+fi
+
+# Check 5: Grade the report content (if it exists)
 if [ -f "$REPORT_FILE" ]; then
   echo ""
   echo "=== Grading report content ==="
@@ -76,7 +111,7 @@ if [ -f "$REPORT_FILE" ]; then
 else
   echo ""
   echo "  Skipping content checks — no report file to grade"
-  # Count the 3 content assertions as failures
+  # Count the 3 content assertions from grade.sh as failures
   fail=$((fail + 3))
   total=$((total + 3))
 fi

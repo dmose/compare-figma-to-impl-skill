@@ -39,6 +39,16 @@ grade_file() {
     fail=$((fail + 1))
   fi
 
+  # Expectation 3: Side-by-side screenshots in Summary of Discrepancies
+  total=$((total + 1))
+  if grep -qE '\|.*!\[Figma.*\|.*!\[Implementation.*\|' "$file"; then
+    echo "  PASS: Contains side-by-side screenshots in table"
+    pass=$((pass + 1))
+  else
+    echo "  FAIL: Missing side-by-side Figma/Implementation screenshots in table row"
+    fail=$((fail + 1))
+  fi
+
   echo ""
 }
 
