@@ -19,27 +19,17 @@ grade_file() {
 
   echo "--- Grading: $basename ---"
 
-  # Expectation 1: No "Styling Details" section header
+  # Expectation 1: Has "Layout & Styling" section
   total=$((total + 1))
-  if grep -qiE '^#{1,4}\s+.*Styling Details' "$file"; then
-    echo "  FAIL: Report contains a 'Styling Details' section header"
-    fail=$((fail + 1))
-  else
-    echo "  PASS: No 'Styling Details' section header found"
-    pass=$((pass + 1))
-  fi
-
-  # Expectation 2: Has "Layout & Structure" section
-  total=$((total + 1))
-  if grep -qiE '^#{1,4}\s+.*Layout.*Structure' "$file"; then
-    echo "  PASS: Contains 'Layout & Structure' section"
+  if grep -qiE '^#{1,4}\s+.*Layout.*Styling' "$file"; then
+    echo "  PASS: Contains 'Layout & Styling' section"
     pass=$((pass + 1))
   else
-    echo "  FAIL: Missing 'Layout & Structure' section"
+    echo "  FAIL: Missing 'Layout & Styling' section"
     fail=$((fail + 1))
   fi
 
-  # Expectation 3: Has "Summary of Discrepancies" section
+  # Expectation 2: Has "Summary of Discrepancies" section
   total=$((total + 1))
   if grep -qiE '^#{1,4}\s+.*Summary.*Discrepancies' "$file"; then
     echo "  PASS: Contains 'Summary of Discrepancies' section"

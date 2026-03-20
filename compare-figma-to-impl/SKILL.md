@@ -146,22 +146,22 @@ screenshots using `screenshot_by_uid` for the specific component.
 
 Produce two comparison sections. Use tables for clarity.
 
-#### Section 1: Layout & Structure
-Compare element positions, flow direction, hierarchy, alignment. Cover:
+#### Section: Layout & Styling
+Compare ALL visual properties in a single section. Cover:
 - Overall container type and flex properties
 - Element hierarchy and nesting
 - Icon position and rendering technique
 - Separator/divider approach
 - Interactive elements (buttons, dropdowns)
-
-#### Section 2: Styling Details
-Compare visual properties. Cover:
 - Background (gradient angle, stops, colors)
 - Border (technique, color, width, radius)
 - Padding and spacing (map to design tokens where possible)
 - Typography (family, size, weight, line-height, color, overflow)
 - Icons and images (source, dimensions, fill color)
 - Shadows and effects
+
+Do NOT create a separate "Styling Details" section — merge all styling
+comparisons into this Layout & Styling section.
 
 ### Phase 4: Classify Discrepancies
 
@@ -204,11 +204,27 @@ Before presenting results, review the analysis for common errors:
 
 ## Output Format
 
-Write the comparison as a structured markdown document with:
-1. Context section (what's being compared)
-2. Layout & Structure table(s)
-3. Styling Details table(s)
-4. Summary of Discrepancies (Critical / Minor / Non-issue)
+**CRITICAL**: You MUST save the report to a file — do not just print it
+to the conversation. After completing the analysis, use the Write tool to
+save the full report to `comparison/report.md` (create the `comparison/`
+directory first with `mkdir -p comparison` if needed). Then briefly
+summarize the findings in the conversation and tell the user the report
+was saved.
+
+The report must be a structured markdown document using these exact
+section headers (as markdown ## headings):
+
+## Context
+What's being compared — the Figma node, the live UI element, and any
+relevant URLs or selectors.
+
+## Layout & Styling
+Table(s) comparing all visual properties — layout (dimensions, spacing,
+positioning, flex/grid), styling (colors, borders, typography, shadows,
+opacity) — between Figma and implementation.
+
+## Summary of Discrepancies
+Categorize each finding as Critical, Minor, or Non-issue.
 
 If the user asks for a plan to fix, add a Changes section with specific
 file paths, line numbers, and code snippets using design tokens where

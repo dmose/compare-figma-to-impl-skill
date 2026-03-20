@@ -4,7 +4,7 @@
 Comparing the AI Window header bar in Figma design (file `abc123`, node `1:42`)
 against the live Firefox implementation at `browser.xhtml > ai-window`.
 
-## Layout & Structure
+## Layout & Styling
 
 | Property | Figma | Implementation | Match? |
 |----------|-------|----------------|--------|

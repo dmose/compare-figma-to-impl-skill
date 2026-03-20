@@ -33,7 +33,9 @@ echo "=== Running skill via claude -p ==="
 echo "Prompt: $PROMPT"
 echo ""
 
-(cd "$REPO_ROOT" && claude -p "$PROMPT") | tee "$OUTPUT_DIR/claude-output.txt"
+(cd "$REPO_ROOT" && echo "$PROMPT" | claude -p --verbose --output-format stream-json \
+  --allowedTools "Bash Write Read Edit Glob Grep Skill mcp__plugin_figma_figma__get_design_context mcp__plugin_figma_figma__get_screenshot mcp__plugin_figma_figma__get_metadata mcp__firefox-devtools__take_snapshot mcp__firefox-devtools__screenshot_page mcp__firefox-devtools__screenshot_by_uid mcp__firefox-devtools__evaluate_script mcp__firefox-devtools__list_pages mcp__firefox-devtools__select_page" \
+  ) | tee "$OUTPUT_DIR/claude-output.txt"
 
 echo ""
 echo "=== Checking output ==="
