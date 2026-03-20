@@ -1,4 +1,6 @@
 .claude/settings.local.json
+.env
+.env.local
 
 # default comparison directory
 comparison

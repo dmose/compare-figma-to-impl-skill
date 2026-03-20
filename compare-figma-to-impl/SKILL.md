@@ -21,6 +21,7 @@ comparison covering layout, structure, and styling.
 
 - The Firefox devtools MCP must be connected
 - The Figma desktop MCP must be connected
+- `FIGMA_TOKEN` must be set in the environment (see `.env.sample`)
 - The target UI must be visible in Firefox (run prerequisite skills like
   `/open-ai-window` or `/open-smartbar-dropdown` first if needed)
 - The correct chrome context must be selected
@@ -29,12 +30,29 @@ comparison covering layout, structure, and styling.
 
 ### Phase 1: Gather Figma Spec
 
-1. Call `mcp__plugin_figma_figma-desktop__get_screenshot` to capture the
-   design visually. Always do this — it's the ground truth. Save the
-   screenshot to `comparison/figma-screenshot.png`.
-2. Call `mcp__plugin_figma_figma-desktop__get_design_context` with
+1. Call `mcp__plugin_figma_figma__get_screenshot` to capture the
+   design visually. Always do this — it's the ground truth for your
+   own visual analysis.
+2. Download the Figma screenshot to disk using the **Figma REST API**
+   so it can be embedded in the report. Parse `fileKey` and `nodeId`
+   from the Figma URL, then run:
+   ```bash
+   source .env 2>/dev/null
+   mkdir -p comparison
+   IMG_URL=$(curl -sH "X-Figma-Token: $FIGMA_TOKEN" \
+     "https://api.figma.com/v1/images/${FILE_KEY}?ids=${NODE_ID}&format=png&scale=2&contents_only=false" \
+     | python3 -c "import sys,json; print(list(json.load(sys.stdin)['images'].values())[0])")
+   if [ -z "$IMG_URL" ] || ! echo "$IMG_URL" | grep -q '^http'; then
+     echo "ERROR: Failed to get image URL from Figma API (check FIGMA_TOKEN and node ID)" >&2
+     exit 1
+   fi
+   curl -sL -o comparison/figma-screenshot.png "$IMG_URL"
+   ```
+   Note: convert `node-id` URL param format (`1-42`) to API format
+   (`1:42`) by replacing `-` with `:`.
+3. Call `mcp__plugin_figma_figma__get_design_context` with
    `forceCode: true` to get the generated code and style tokens.
-3. Extract from the Figma output:
+4. Extract from the Figma output:
    - Layout: flex direction, alignment, gap, padding
    - Dimensions: widths, heights, border-radius
    - Typography: font-family, size, weight, line-height, color

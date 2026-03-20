@@ -46,7 +46,7 @@ if [ "$GRADE_ONLY" = false ]; then
   echo ""
 
   (cd "$REPO_ROOT" && echo "$PROMPT" | claude -p --verbose --output-format stream-json \
-    --allowedTools "Bash Write Read Edit Glob Grep Skill mcp__plugin_figma_figma__get_design_context mcp__plugin_figma_figma__get_screenshot mcp__plugin_figma_figma__get_metadata mcp__firefox-devtools__take_snapshot mcp__firefox-devtools__screenshot_page mcp__firefox-devtools__screenshot_by_uid mcp__firefox-devtools__evaluate_script mcp__firefox-devtools__list_pages mcp__firefox-devtools__select_page" \
+    --allowedTools "Bash Write Read Edit Glob Grep Skill mcp__plugin_figma_figma__get_design_context mcp__plugin_figma_figma__get_screenshot mcp__plugin_figma_figma__get_metadata mcp__firefox-devtools__take_snapshot mcp__firefox-devtools__screenshot_page mcp__firefox-devtools__screenshot_by_uid mcp__firefox-devtools__evaluate_script mcp__firefox-devtools__evaluate_chrome_script mcp__firefox-devtools__list_chrome_contexts mcp__firefox-devtools__select_chrome_context mcp__firefox-devtools__list_pages mcp__firefox-devtools__select_page" \
     ) | tee "$OUTPUT_DIR/claude-output.txt"
 else
   echo "=== Grade-only mode: using existing comparison/ directory ==="
