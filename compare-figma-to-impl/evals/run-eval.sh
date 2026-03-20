@@ -9,7 +9,7 @@
 #   - Figma MCP and Firefox devtools MCP are connected
 #
 # What this checks:
-#   1. The skill creates a figma-impl-compare/ directory
+#   1. The skill creates a comparison/ directory
 #   2. The skill saves a report.md file in that directory
 #   3. The report passes all content assertions (no "Styling Details" section, etc.)
 
@@ -17,7 +17,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
-OUTPUT_DIR="$REPO_ROOT/figma-impl-compare"
+OUTPUT_DIR="$REPO_ROOT/comparison"
 REPORT_FILE="$OUTPUT_DIR/report.md"
 
 DEFAULT_PROMPT='Compare the four icon buttons in the top left corner of the firefox main window to
