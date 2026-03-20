@@ -27,7 +27,7 @@ if [ "${1:-}" = "-g" ]; then
 fi
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 OUTPUT_DIR="$REPO_ROOT/comparison"
 REPORT_FILE="$OUTPUT_DIR/report.md"
 
