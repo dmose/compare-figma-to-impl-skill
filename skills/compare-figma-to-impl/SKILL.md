@@ -1,12 +1,12 @@
 ---
 name: compare-figma-to-impl
 description: >
-  This skill should be used when the user asks to "compare to Figma",
-  "compare to the design", "compare to the mock", "visual comparison",
-  "check against Figma", "match the mock", "design diff", or wants to
-  systematically compare a live Firefox UI element against a Figma design.
-  Also trigger when given a Figma URL alongside a request to inspect or
-  match a specific UI element.
+  Compare a Figma design to a live implementation. Produces a structured
+  comparison report with screenshots saved to disk. Trigger phrases:
+  "compare to Figma", "compare to the design", "compare to the mock",
+  "visual comparison", "check against Figma", "match the mock",
+  "design diff", or a Figma URL with a request to inspect or match a
+  UI element.
 context: fork
 agent: general-purpose
 ---
@@ -43,13 +43,28 @@ comparison covering layout, structure, and styling.
      "https://api.figma.com/v1/images/${FILE_KEY}?ids=${NODE_ID}&format=png&scale=2&contents_only=false" \
      | python3 -c "import sys,json; print(list(json.load(sys.stdin)['images'].values())[0])")
    if [ -z "$IMG_URL" ] || ! echo "$IMG_URL" | grep -q '^http'; then
-     echo "ERROR: Failed to get image URL from Figma API (check FIGMA_TOKEN and node ID)" >&2
+     echo "FATAL: Figma API returned an invalid response. The FIGMA_TOKEN is likely expired or invalid." >&2
+     echo "Fix: (1) Generate a new token at https://www.figma.com/developers/api#access-tokens" >&2
+     echo "     (2) Set it in your environment or .env file" >&2
+     echo "     (3) Re-run the comparison" >&2
      exit 1
    fi
    curl -sL -o comparison/figma-screenshot.png "$IMG_URL"
    ```
    Note: convert `node-id` URL param format (`1-42`) to API format
    (`1:42`) by replacing `-` with `:`.
+
+   **Run this script exactly as written — do not rewrite or simplify it.**
+   The error guard must execute so the user sees actionable fix steps.
+
+   **If this command exits non-zero, STOP.** Do not proceed to Phase 2.
+   Do not continue without `comparison/figma-screenshot.png` on disk.
+   Report the following to the user and end the comparison:
+
+   > The FIGMA_TOKEN is expired or invalid.
+   > Fix: (1) Generate a new token at https://www.figma.com/developers/api#access-tokens
+   >      (2) Set it in your environment or .env file
+   >      (3) Re-run the comparison
 3. Call `mcp__plugin_figma_figma__get_design_context` with
    `forceCode: true` to get the generated code and style tokens.
 4. Extract from the Figma output:
