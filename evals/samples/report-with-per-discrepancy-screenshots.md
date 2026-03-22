@@ -17,27 +17,11 @@ against the live Firefox implementation at `browser.xhtml > ai-window`.
 | Border bottom | 1px solid #E0E0E6 | 1px solid rgba(0,0,0,0.1) | Minor diff |
 | Border radius | 8px 8px 0 0 | 8px 8px 0 0 | Yes |
 | Child count | 3 (icon, title, close btn) | 3 (icon, title, close btn) | Yes |
-
-### Icon
-- Figma: 16x16 SVG, Google logo
-- Impl: 16x16 `<img src="chrome://browser/content/search-engine.svg">` (dynamically loaded)
-- Opacity: 1.0 / 1.0
-
-### Title
-- Font: 15px / 600 / system-ui (Figma) vs -apple-system (impl) — same on macOS
-- Color: #15141A (Figma) vs rgb(21, 20, 26) (impl) — identical values
-- Line height: 20px / 20px
-
-### Close Button
-- Figma: 24x24 circle with X icon
-- Impl: `<button class="close-btn">` 24x24 with `::before` pseudo-element for X
-- Background: transparent, hover rgba(0,0,0,0.1) — matches
+| Title font-size | 15px | 15px | Yes |
+| Title font-weight | 600 | 600 | Yes |
+| Title color | #15141A | rgb(21, 20, 26) | Yes |
 
 ## Summary of Discrepancies
-
-| Figma | Implementation |
-|:---:|:---:|
-| ![Figma screenshot](comparison/figma-screenshot.png) | ![Implementation screenshot](comparison/impl-screenshot.png) |
 
 ### Critical
 None.
@@ -45,9 +29,22 @@ None.
 ### Minor
 1. **Border color mismatch**: Figma uses `#E0E0E6` (solid hex), implementation uses
    `rgba(0,0,0,0.1)`. Visually very similar on white background but technically different
-   approaches. Implementation uses the design token `--border-color-default`.
+   approaches.
+
+| Figma | Implementation |
+|:---:|:---:|
+| ![Figma border comparison](comparison/figma-border-color.png) | ![Implementation border comparison](comparison/impl-border-color.png) |
 
 ### Non-issue
 1. **Font family**: Figma shows `system-ui`, implementation uses `-apple-system, BlinkMacSystemFont`
    — these resolve to the same font on macOS.
+
+| Figma | Implementation |
+|:---:|:---:|
+| ![Figma font comparison](comparison/figma-font-family.png) | ![Implementation font comparison](comparison/impl-font-family.png) |
+
 2. **Title color**: `#15141A` vs `rgb(21, 20, 26)` — identical values, different notation.
+
+| Figma | Implementation |
+|:---:|:---:|
+| ![Figma title color](comparison/figma-title-color.png) | ![Implementation title color](comparison/impl-title-color.png) |

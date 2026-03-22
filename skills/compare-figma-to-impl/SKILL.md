@@ -259,16 +259,23 @@ positioning, flex/grid), styling (colors, borders, typography, shadows,
 opacity) — between Figma and implementation.
 
 ## Summary of Discrepancies
-Immediately after this heading, include the Figma and implementation
-screenshots side by side in a table, using relative paths:
+Categorize each finding as Critical, Minor, or Non-issue under
+`### Critical`, `### Minor`, and `### Non-issue` sub-headings.
+
+Each individual discrepancy must have its own screenshot table showing
+the relevant area, with the Figma crop on the left and implementation
+crop on the right. Use unique filenames per discrepancy:
 
 ```
+1. **Border color mismatch**: Description of the issue...
+
 | Figma | Implementation |
 |:---:|:---:|
-| ![Figma screenshot](comparison/figma-screenshot.png) | ![Implementation screenshot](comparison/impl-screenshot.png) |
+| ![Figma border comparison](comparison/figma-border-color.png) | ![Implementation border comparison](comparison/impl-border-color.png) |
 ```
 
-Then categorize each finding as Critical, Minor, or Non-issue.
+Every severity level (Critical, Minor, Non-issue) gets screenshot
+tables. Sections with no discrepancies should contain only "None.".
 
 If the user asks for a plan to fix, add a Changes section with specific
 file paths, line numbers, and code snippets using design tokens where

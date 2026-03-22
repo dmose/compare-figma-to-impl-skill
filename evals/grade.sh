@@ -39,14 +39,56 @@ grade_file() {
     fail=$((fail + 1))
   fi
 
-  # Expectation 3: Side-by-side screenshots in Summary of Discrepancies
+  # Expectation 3: Per-discrepancy screenshot tables
   total=$((total + 1))
-  if grep -qE '\|.*!\[Figma.*\|.*!\[Implementation.*\|' "$file"; then
-    echo "  PASS: Contains side-by-side screenshots in table"
-    pass=$((pass + 1))
-  else
-    echo "  FAIL: Missing side-by-side Figma/Implementation screenshots in table row"
+  local discrepancy_section
+  # Extract from "## Summary of Discrepancies" to the next ## heading or EOF
+  discrepancy_section=$(awk '/^## Summary of Discrepancies/{found=1; next} found && /^## [^#]/{exit} found' "$file")
+
+  if [ -z "$discrepancy_section" ]; then
+    echo "  FAIL: Could not extract Summary of Discrepancies section"
     fail=$((fail + 1))
+  else
+    # Count discrepancies: top-level numbered items (no leading whitespace)
+    local discrepancy_count
+    discrepancy_count=$(echo "$discrepancy_section" | grep -cE '^[0-9]+\.' || true)
+
+    # Count screenshot tables
+    local screenshot_table_count
+    screenshot_table_count=$(echo "$discrepancy_section" | grep -cE '\|.*!\[Figma.*\|.*!\[Implementation.*\|' || true)
+
+    if [ "$discrepancy_count" -eq 0 ] && [ "$screenshot_table_count" -eq 0 ]; then
+      echo "  PASS: No discrepancies and no screenshot tables (consistent)"
+      pass=$((pass + 1))
+    elif [ "$screenshot_table_count" -eq "$discrepancy_count" ]; then
+      echo "  PASS: Found $discrepancy_count discrepancies with $screenshot_table_count screenshot tables (1:1)"
+      pass=$((pass + 1))
+    else
+      echo "  FAIL: Found $discrepancy_count discrepancies but $screenshot_table_count screenshot tables (expected 1 per discrepancy)"
+      fail=$((fail + 1))
+    fi
+
+    # Check file existence for referenced screenshots (skip for samples)
+    if [[ "$file" != *evals/samples/* ]]; then
+      local report_dir
+      report_dir="$(dirname "$file")"
+      while IFS= read -r img_path; do
+        [ -z "$img_path" ] && continue
+        total=$((total + 1))
+        # Resolve relative paths against the report's directory
+        local resolved_path="$img_path"
+        if [[ "$img_path" != /* ]]; then
+          resolved_path="$report_dir/$img_path"
+        fi
+        if [ -f "$resolved_path" ]; then
+          echo "  PASS: Referenced screenshot $img_path exists"
+          pass=$((pass + 1))
+        else
+          echo "  FAIL: Referenced screenshot $img_path does not exist"
+          fail=$((fail + 1))
+        fi
+      done < <(echo "$discrepancy_section" | grep -oE '!\[[^]]*\]\([^)]+\)' | grep -oE '\([^)]+\)' | tr -d '()')
+    fi
   fi
 
   echo ""
