@@ -74,6 +74,12 @@ comparison covering layout, structure, and styling.
    - Colors: backgrounds, gradients, borders, shadows
    - Icons: type, size, position
    - The style token annotations (e.g. `NEW/Font/Size/Large/bold`)
+5. **Record sub-node IDs**: From the `get_design_context` response, note
+   the Figma node ID for each distinct child element (icon, title text,
+   button, separator, description text, etc.). These IDs are needed in
+   Phase 5 to capture focused per-discrepancy Figma screenshots. Store
+   them as a mapping of element label → node ID (e.g. `icon → 1:234`,
+   `title → 1:235`).
 
 ### Phase 2: Inspect Live Implementation
 
@@ -210,7 +216,51 @@ Categorize each difference into one of three buckets:
    `border-radius: 9999px` vs `24px` when both produce a pill at that
    height; `box-shadow` vs `border` producing the same visual)
 
-### Phase 5: Self-Check
+### Phase 5: Capture Per-Discrepancy Screenshots
+
+For each discrepancy identified in Phase 4, capture a focused screenshot
+of the relevant area from both Figma and the implementation.
+
+#### Figma side
+
+- If the discrepancy maps to a distinct child node (e.g. icon, title
+  text), use `mcp__plugin_figma_figma__get_screenshot` targeting that
+  node's ID (recorded in Phase 1 step 5).
+- If the discrepancy is a property of the container (border, shadow,
+  padding) with no distinct sub-node, screenshot the container node at
+  higher scale (e.g. `scale=4`) for a zoomed view that better shows
+  the detail.
+- Download each screenshot via the Figma REST API using the node's ID,
+  same pattern as Phase 1 step 2 (replace `NODE_ID` with the specific
+  node, keep the same `FILE_KEY`).
+- Save as `comparison/figma-{slug}.png` where `{slug}` is a short
+  kebab-case label derived from the discrepancy (e.g. `border-color`,
+  `icon-size`, `title-font`).
+
+#### Implementation side
+
+- Take a fresh `mcp__firefox-devtools__take_snapshot` — the Phase 2
+  snapshot may no longer be in scope and `screenshot_by_uid` requires
+  current UIDs.
+- Use `mcp__firefox-devtools__screenshot_by_uid` with the `saveTo`
+  parameter targeting the specific DOM element involved in the
+  discrepancy.
+- Save as `comparison/impl-{slug}.png` using the same slug as the
+  Figma side.
+- For discrepancies about CSS properties without a clear element
+  boundary (border, shadow, gradient), use `screenshot_by_uid` on the
+  nearest parent element that visually shows the effect.
+
+#### Filename convention
+
+- Each discrepancy must have a unique slug.
+- Use descriptive slugs derived from the discrepancy description
+  (e.g. `border-color`, `icon-size`, `title-font-weight`).
+- The full overview screenshots (`figma-screenshot.png` /
+  `impl-screenshot.png`) remain unchanged — they are still used in
+  Phase 2.5.
+
+### Phase 6: Self-Check
 
 Before presenting results, review the analysis for common errors:
 
