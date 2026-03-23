@@ -91,6 +91,19 @@ grade_file() {
     fi
   fi
 
+  # Expectation 4: Image references have no path components (same-directory only)
+  total=$((total + 1))
+  local bad_paths
+  bad_paths=$(grep -oE '!\[[^]]*\]\([^)]+\)' "$file" | grep -oE '\([^)]+\)' | tr -d '()' | grep '/' || true)
+  if [ -z "$bad_paths" ]; then
+    echo "  PASS: All image references are filename-only (no path components)"
+    pass=$((pass + 1))
+  else
+    echo "  FAIL: Image references contain path components (should be filename-only):"
+    echo "$bad_paths" | sed 's/^/    /'
+    fail=$((fail + 1))
+  fi
+
   echo ""
 }
 

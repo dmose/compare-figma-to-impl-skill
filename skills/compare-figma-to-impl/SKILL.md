@@ -321,7 +321,7 @@ crop on the right. Use unique filenames per discrepancy:
 
 | Figma | Implementation |
 |:---:|:---:|
-| ![Figma border comparison](comparison/figma-border-color.png) | ![Implementation border comparison](comparison/impl-border-color.png) |
+| ![Figma border comparison](figma-border-color.png) | ![Implementation border comparison](impl-border-color.png) |
 ```
 
 Every severity level (Critical, Minor, Non-issue) gets screenshot

@@ -33,7 +33,7 @@ None.
 
 | Figma | Implementation |
 |:---:|:---:|
-| ![Figma border comparison](comparison/figma-border-color.png) | ![Implementation border comparison](comparison/impl-border-color.png) |
+| ![Figma border comparison](figma-border-color.png) | ![Implementation border comparison](impl-border-color.png) |
 
 ### Non-issue
 1. **Font family**: Figma shows `system-ui`, implementation uses `-apple-system, BlinkMacSystemFont`
@@ -41,10 +41,10 @@ None.
 
 | Figma | Implementation |
 |:---:|:---:|
-| ![Figma font comparison](comparison/figma-font-family.png) | ![Implementation font comparison](comparison/impl-font-family.png) |
+| ![Figma font comparison](figma-font-family.png) | ![Implementation font comparison](impl-font-family.png) |
 
 2. **Title color**: `#15141A` vs `rgb(21, 20, 26)` — identical values, different notation.
 
 | Figma | Implementation |
 |:---:|:---:|
-| ![Figma title color](comparison/figma-title-color.png) | ![Implementation title color](comparison/impl-title-color.png) |
+| ![Figma title color](figma-title-color.png) | ![Implementation title color](impl-title-color.png) |
