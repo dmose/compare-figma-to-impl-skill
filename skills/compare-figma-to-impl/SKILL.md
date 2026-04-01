@@ -303,10 +303,6 @@ section headers (as markdown ## headings):
 What's being compared — the Figma node, the live UI element, and any
 relevant URLs or selectors.
 
-## Layout & Styling
-Table(s) comparing all visual properties — layout (dimensions, spacing,
-positioning, flex/grid), styling (colors, borders, typography, shadows,
-opacity) — between Figma and implementation.
 
 ## Summary of Discrepancies
 Categorize each finding as Critical, Minor, or Non-issue under
@@ -330,6 +326,11 @@ tables. Sections with no discrepancies should contain only "None.".
 If the user asks for a plan to fix, add a Changes section with specific
 file paths, line numbers, and code snippets using design tokens where
 available.
+
+## Layout & Styling
+Table(s) comparing all visual properties — layout (dimensions, spacing,
+positioning, flex/grid), styling (colors, borders, typography, shadows,
+opacity) — between Figma and implementation.
 
 ## Additional Resources
 
