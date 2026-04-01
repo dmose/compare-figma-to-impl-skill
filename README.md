@@ -4,7 +4,7 @@
 
 A Claude Code skill that systematically compares a Figma design to a live browser implementation, producing a structured report with side-by-side screenshots and classified discrepancies.
 
-Give it a Figma URL and a running UI in Firefox, and it extracts layout, typography, colors, icons, and effects from both sides, then reports what matches, what's close, and what's wrong. See an [example report](evals/samples/report.md).
+Give it a Figma URL and a running UI in Firefox, and it extracts layout, typography, colors, icons, and effects from both sides, then reports what matches, what's close, and what's wrong. See example reports for a [toolbar button](evals/samples/simple-toolbar-button/report.md) and a [smartbar dropdown](evals/samples/aiwindow-smartbar-dropdown/report.md).
 
 ## Why this exists
 
@@ -32,7 +32,7 @@ The report is saved to `comparison/report.md` and includes:
 - **Summary of Discrepancies**: classified as Critical / Minor / Non-issue, each with a side-by-side screenshot table
 - **Layout & Styling**: full property comparison table (flex properties, box model, typography, colors, effects)
 
-See [`evals/samples/report.md`](evals/samples/report.md) for an example.
+See example reports for a [toolbar button](evals/samples/simple-toolbar-button/report.md) and a [smartbar dropdown](evals/samples/aiwindow-smartbar-dropdown/report.md).
 
 ## Prerequisites
 
