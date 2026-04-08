@@ -2,9 +2,9 @@
 
 **Stop squinting at Figma and your browser. Diff it.**
 
-Figma says "Semibold." Is that `font-weight: 500`? `590`? `600`? Now multiply that question by every padding, color, gradient stop, and shadow on the component. This skill answers all of them at once.
+Figma says "Semibold." Is that `font-weight: 500`? `590`? `600`? Multiply that by every padding, color, gradient stop, and shadow on the component — this skill extracts them all from Figma and diffs them against live computed styles.
 
-Give it a Figma URL and a running UI in Firefox, and you get a structured comparison like this:
+Point it at a Figma URL and a running UI in Firefox:
 
 | Property | Figma | Implementation | Match? |
 |---|---|---|---|
@@ -22,15 +22,15 @@ Give it a Figma URL and a running UI in Firefox, and you get a structured compar
 |:---:|:---:|
 | ![Figma design](evals/samples/aiwindow-smartbar-dropdown/figma-screenshot.png) | ![Live implementation](evals/samples/aiwindow-smartbar-dropdown/impl-screenshot.png) |
 
-### Run it before you write a single line of CSS
+### Use it before you code
 
-The killer use case isn't QA — it's **spec generation**. Run the comparison before you start coding and the output becomes your implementation checklist. Feed it to an LLM coding agent as acceptance criteria, or use it yourself while building the component. No ambiguity about what the design actually specifies.
+Run the comparison before you start implementing and the output is your checklist — every property the implementation needs to match, with exact values. Feed it to an LLM coding agent as acceptance criteria, or use it as a reference yourself.
 
 ```
 /compare-figma-to-impl https://www.figma.com/design/FILE_KEY/File-Name?node-id=1-42 to the smartbar dropdown
 ```
 
-Run it after coding and it becomes automated QA — every discrepancy classified as Critical (visually broken), Minor (measurable difference), or Non-issue (numerically different but visually identical). Share the report with designers as a redline — each discrepancy includes side-by-side screenshots and exact values from both sides.
+Run it after implementation to catch mismatches before review. Each discrepancy is classified as Critical (visually broken), Minor (measurable difference), or Non-issue (numerically different but visually identical). The report includes side-by-side screenshots for each finding.
 
 See example reports: [toolbar button](evals/samples/simple-toolbar-button/report.md) | [smartbar dropdown](evals/samples/aiwindow-smartbar-dropdown/report.md)
 
