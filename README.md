@@ -1,6 +1,6 @@
 # compare-figma-to-impl
 
-**Stop squinting at Figma. Start with the exact spec.**
+**Stop squinting at Figma and your browser. Diff it.**
 
 Figma says "Semibold." Is that `font-weight: 500`? `590`? `600`? Now multiply that question by every padding, color, gradient stop, and shadow on the component. This skill answers all of them at once.
 
