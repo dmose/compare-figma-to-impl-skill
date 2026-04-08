@@ -2,7 +2,7 @@
 
 **Stop squinting at Figma and your browser. Diff it.**
 
-Figma says "Semibold." Is that `font-weight: 500`? `590`? `600`? Multiply that by every padding, color, gradient stop, and shadow on the component — this skill extracts them all from Figma and diffs them against live computed styles.
+A single dropdown has lots of visual properties. Manually checking each one against Figma is slow, painful and error prone — font weight 700 instead of 590, gradient angle off by 34 degrees, padding short by 2.5px. This skill does the comparison automatically.
 
 Point it at a Figma URL and a running UI in Firefox:
 
