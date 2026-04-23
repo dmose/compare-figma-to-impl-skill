@@ -8,13 +8,13 @@ blocker issues:
     * MUCH SHORTER
     * USERS PAIN POINTS
 
-How to use docs
-- [ ] how-to-configure documentation work
-    - [ ] document all settings from overholt's tab
-    - [ ] figma-mcp (see overholt's doc)
-    - [ ] firefox-devtools-mcp
+Installation / configuration
+- [x] how-to-configure documentation work
+    - [x] figma-mcp (see overholt's doc)
+    - [x] firefox-devtools-mcp
+- [ ] write marketplace / plugin installation
 - [ ] test marketplace / plugin installation
-- [ ] try install/usage & iterate
+- [ ] add security notes
 
 Reach out to testers
 - [ ] put in tooling doc
@@ -25,15 +25,12 @@ Usability
 - [ ] as a developer, i see image pairs at the same scale/zoom, so i get a faster, clearer understanding of differences
 - [ ] as a developer, I see both images in a pair covering the same visual area, so I get a faster, clearer understanding of the differences
 
-
 Funnel refinement
 - [ ] refine elevator pitch
     * SHOW PROCESS WITH & WITHOUT (end-to-end impl?)
     * VISUAL?
-- [ ] update .mcp.json to use 
-    - [ ] --env MOZ_REMOTE_ALLOW_SYSTEM_ACCESS=1
-    - [ ] --pref remote.prefs.recommended=false
-    - [ ] --pref browser.smartwindow.enabled=true
+- [ ] ease-of-installation: clean up Figma dependencies
+- [ ] ease-of-installation: land better .mcp.json defaults (bug in progress)
 
 general quality
 - [ ] review discrepancies against screenshots and fix issues
