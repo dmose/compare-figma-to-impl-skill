@@ -29,8 +29,12 @@ Funnel refinement
 - [ ] refine elevator pitch
     * SHOW PROCESS WITH & WITHOUT (end-to-end impl?)
     * VISUAL?
+- [ ] Maybe use plugin .mcp.json with env vars?
+    * ./mach python -c "import buildconfig; print(buildconfig.topobjdir)"
 - [ ] ease-of-installation: clean up Figma dependencies
-- [ ] ease-of-installation: land better .mcp.json defaults (bug in progress)
+    - [ ] Use a marketplace.json with `allowCrossMarketplaceDependenciesOn` and a dependency in `plugin.json`
+    - [ ] see if we can switch to figma `remote mcp` and ditch the REST and desktop deps
+- [ ] ease-of-installation: land better m-c .mcp.json defaults (bug in progress)
 
 general quality
 - [ ] review discrepancies against screenshots and fix issues
