@@ -12,12 +12,14 @@ Installation / configuration
 - [x] how-to-configure documentation work
     - [x] figma-mcp (see overholt's doc)
     - [x] firefox-devtools-mcp
-- [ ] write marketplace / plugin installation
-- [ ] test marketplace / plugin installation
-- [ ] add security notes
+- [x] finish .plugin impl
+- [ ] merge branch
+- [ ] install & doc this plugin on test machine
+- [ ] install figma deps on test machine
+- [ ] test run (eval example?)
+- [ ] add security notes; check permissions stuff
 
 Reach out to testers
-- [ ] put in tooling doc
 - [ ] announce in #ai4dev
 
 Usability
