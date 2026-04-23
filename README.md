@@ -42,7 +42,10 @@ See example reports: [toolbar button](evals/samples/simple-toolbar-button/report
 
 - [Claude Code](https://docs.anthropic.com/en/docs/claude-code) with this plugin installed
 
-  XXX how to install this plugin
+  ```
+  /plugin marketplace add dmose/compare-figma-to-impl-skill
+  /plugin install compare-figma-to-impl@dmose-compare-figma-to-impl-skill
+  ```
 
 - Reconfigured [Firefox DevTools MCP server] to use the binary and profile in the current Firefox tree/worktree
 
@@ -86,8 +89,6 @@ See example reports: [toolbar button](evals/samples/simple-toolbar-button/report
 With the prerequisites running, invoke the skill from Claude Code:
 
 1. Start claude code
-2. 
-3. 
 ```
 /compare-figma-to-impl https://www.figma.com/design/FILE_KEY/File-Name?node-id=1-42 to the AI window header 
 ```

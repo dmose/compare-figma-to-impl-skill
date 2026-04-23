@@ -2,6 +2,12 @@
   "name": "compare-figma-to-impl",
   "description": "Systematically compare a live Firefox UI element against a Figma design, producing a structured report with side-by-side screenshots and discrepancy analysis.",
   "version": "0.1.0",
+  "dependencies": [
+    {
+      "name": "figma",
+      "marketplace": "claude-plugins-official"
+    }
+  ],
   "permissions": [
     "mcp__plugin_figma_figma__get_design_context",
     "mcp__plugin_figma_figma__get_screenshot",
