@@ -41,14 +41,53 @@ See example reports: [toolbar button](evals/samples/simple-toolbar-button/report
 ## Prerequisites
 
 - [Claude Code](https://docs.anthropic.com/en/docs/claude-code) with this plugin installed
-- [Figma MCP server](https://github.com/nichochar/figma-mcp) connected, with `FIGMA_TOKEN` set
-- [Firefox DevTools MCP server](https://github.com/nichochar/firefox-devtools-mcp) connected
-- The target UI visible in a Firefox tab
+
+  XXX how to install this plugin
+
+- Reconfigured [Firefox DevTools MCP server] to use the binary and profile in the current Firefox tree/worktree
+
+  1. Be sure you have `npx` in your `${PATH}`   
+  2. Configure this Firefox directory to override the firefox-devtools MCP server arguments so that it starts Firefox from an objdir in this directory and uses the default profile in that objdir  
+     - You may need to edit both instances of the objdir name in the example command below to refer to something other than `obj-aarch64-apple-darwin25.4.0`  
+     - XXX security warnings  
+     - XXX discuss permissions
+     - From a shell in the top-level of your firefox directory:
+       ``` 
+       claude mcp add --scope local firefox-devtools -- \
+          ./mach npx @padenot/firefox-devtools-mcp \
+          --firefoxPath \
+          ${PWD}/obj-aarch64-apple-darwin25.4.0/dist/Nightly.app/Contents/MacOS/firefox \
+          --profilePath \
+          ${PWD}/obj-aarch64-apple-darwin25.4.0/tmp/profile-default \
+          --enable-script \
+          --enable-privileged-context \
+          --env MOZ_REMOTE_ALLOW_SYSTEM_ACCESS=1 \
+          --pref remote.prefs.recommended=false \
+          --pref browser.smartwindow.enabled=true
+       ```
+  3. Test it. In the toplevel of your firefox dir, start claude, and then:
+     1. Type `/mcp`  
+     2. Ignore the `multiple scopes` warning
+     3. Wait to make sure that firefox-devtools in the `Local MCP` section makes it to the `connected` state
+     4. Tell it `use firefox-devtools mcp to open a firefox window`
+     5. `XXX approve the permission`  
+     6. You should see a Firefox window!
+
+- Configure Figma
+  - Install Figma Desktop
+  - Configure Figma MCP server:
+
+    ```claude plugin install figma@claude-plugins-official```
+  - Get a Figma API token, and set it as `FIGMA_TOKEN` in the environment
+  - [Note] This is a super janky architecture for using Figma, but was needed at the beginning. With luck, we should now (or soon?) be able to switch the Figma Remote MCP, and drop the dependencies on Figma Desktop and the REST API. 
 
 ## Usage
 
 With the prerequisites running, invoke the skill from Claude Code:
 
+1. Start claude code
+2. 
+3. 
 ```
 /compare-figma-to-impl https://www.figma.com/design/FILE_KEY/File-Name?node-id=1-42 to the AI window header 
 ```
