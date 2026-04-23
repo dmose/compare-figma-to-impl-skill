@@ -8,16 +8,18 @@ blocker issues:
     * MUCH SHORTER
     * USERS PAIN POINTS
 
-How to use docs
-- [ ] how-to-configure documentation work
-    - [ ] document all settings from overholt's tab
-    - [ ] figma-mcp (see overholt's doc)
-    - [ ] firefox-devtools-mcp
-- [ ] test marketplace / plugin installation
-- [ ] try install/usage & iterate
+Installation / configuration
+- [x] how-to-configure documentation work
+    - [x] figma-mcp (see overholt's doc)
+    - [x] firefox-devtools-mcp
+- [x] finish .plugin impl
+- [ ] merge branch
+- [ ] install & doc this plugin on test machine
+- [ ] install figma deps on test machine
+- [ ] test run (eval example?)
+- [ ] add security notes; check permissions stuff
 
 Reach out to testers
-- [ ] put in tooling doc
 - [ ] announce in #ai4dev
 
 Usability
@@ -25,15 +27,16 @@ Usability
 - [ ] as a developer, i see image pairs at the same scale/zoom, so i get a faster, clearer understanding of differences
 - [ ] as a developer, I see both images in a pair covering the same visual area, so I get a faster, clearer understanding of the differences
 
-
 Funnel refinement
 - [ ] refine elevator pitch
     * SHOW PROCESS WITH & WITHOUT (end-to-end impl?)
     * VISUAL?
-- [ ] update .mcp.json to use 
-    - [ ] --env MOZ_REMOTE_ALLOW_SYSTEM_ACCESS=1
-    - [ ] --pref remote.prefs.recommended=false
-    - [ ] --pref browser.smartwindow.enabled=true
+- [ ] Maybe use plugin .mcp.json with env vars?
+    * ./mach python -c "import buildconfig; print(buildconfig.topobjdir)"
+- [ ] ease-of-installation: clean up Figma dependencies
+    - [ ] Use a marketplace.json with `allowCrossMarketplaceDependenciesOn` and a dependency in `plugin.json`
+    - [ ] see if we can switch to figma `remote mcp` and ditch the REST and desktop deps
+- [ ] ease-of-installation: land better m-c .mcp.json defaults (bug in progress)
 
 general quality
 - [ ] review discrepancies against screenshots and fix issues
