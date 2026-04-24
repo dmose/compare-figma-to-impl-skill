@@ -39,7 +39,7 @@ Funnel refinement
 - [ ] Maybe use plugin .mcp.json with env vars?
     * ./mach python -c "import buildconfig; print(buildconfig.topobjdir)"
 - [ ] ease-of-installation: clean up Figma dependencies
-    - [ ] Use a marketplace.json with `allowCrossMarketplaceDependenciesOn` and a dependency in `plugin.json`
+    - [x] Use a marketplace.json with `allowCrossMarketplaceDependenciesOn` and a dependency in `plugin.json`
     - [ ] see if we can switch to figma `remote mcp` and ditch the REST and desktop deps
 - [ ] ease-of-installation: land better m-c .mcp.json defaults (bug in progress)
 
