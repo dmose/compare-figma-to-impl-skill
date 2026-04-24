@@ -19,6 +19,7 @@ Installation / configuration
 - [x] install figma deps on test machine
 - [x] test run (eval example?)
 - [ ] add security notes
+- [ ] document unreliability
 - [ ] loosen permission stuff in plugin
 - [ ] re-test 
 
@@ -43,8 +44,8 @@ Funnel refinement
 - [ ] ease-of-installation: land better m-c .mcp.json defaults (bug in progress)
 
 general quality
+- [ ] commmit plan to incrementally switch to mini-workflow with schemas
 - [ ] review discrepancies against screenshots and fix issues
 - [ ] look at claude devtools failures
 - [ ] make firefox-devtools-mcp shutdown browser on signal (for evals, maybe more?)
-- [ ] schemas?
 
