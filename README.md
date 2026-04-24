@@ -43,8 +43,8 @@ See example reports: [toolbar button](evals/samples/simple-toolbar-button/report
 - [Claude Code](https://docs.anthropic.com/en/docs/claude-code) with this plugin installed
 
   ```
-  /plugin marketplace add dmose/compare-figma-to-impl-skill
-  /plugin install compare-figma-to-impl@dmose-compare-figma-to-impl-skill
+  claude plugin marketplace add dmose/compare-figma-to-impl-skill
+  claude plugin install compare-figma-to-impl@dmose-compare-figma-to-impl-skill
   ```
 
 - Reconfigured [Firefox DevTools MCP server] to use the binary and profile in the current Firefox tree/worktree
@@ -78,10 +78,14 @@ See example reports: [toolbar button](evals/samples/simple-toolbar-button/report
 
 - Configure Figma
   - Install Figma Desktop
-  - Configure Figma MCP server:
-
-    ```claude plugin install figma@claude-plugins-official```
   - Get a Figma API token, and set it as `FIGMA_TOKEN` in the environment
+  - Authenticate to Figma
+    - start claude
+    - type `/mcp`
+    - look for `plugin:figma:figma`, it will likely (eventually) say `needs authentication`
+    - Select that server
+    - Follow the prompts to authenticate using your browser.
+
   - [Note] This is a super janky architecture for using Figma, but was needed at the beginning. With luck, we should now (or soon?) be able to switch the Figma Remote MCP, and drop the dependencies on Figma Desktop and the REST API. 
 
 ## Usage

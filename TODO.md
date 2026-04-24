@@ -13,11 +13,15 @@ Installation / configuration
     - [x] figma-mcp (see overholt's doc)
     - [x] firefox-devtools-mcp
 - [x] finish .plugin impl
-- [ ] merge branch
-- [ ] install & doc this plugin on test machine
-- [ ] install figma deps on test machine
-- [ ] test run (eval example?)
-- [ ] add security notes; check permissions stuff
+- [x] merge branch
+- [x] add marketplace.json
+- [x] install & doc this plugin on test machine
+- [x] install figma deps on test machine
+- [x] test run (eval example?)
+- [ ] add security notes
+- [ ] loosen permission stuff in plugin
+- [ ] re-test 
+
 
 Reach out to testers
 - [ ] announce in #ai4dev
