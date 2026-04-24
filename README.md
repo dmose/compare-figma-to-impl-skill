@@ -1,6 +1,6 @@
 # compare-figma-to-impl
 
-**Stop squinting at Figma and your browser. Diff it.**
+**Stop squinting at Figma and your browser. Generate a visual diff report with images.**
 
 A single dropdown has lots of visual properties. Manually checking each one against Figma is slow, painful and error prone — font weight 700 instead of 590, gradient angle off by 34 degrees, padding short by 2.5px. This skill does the comparison automatically.
 
