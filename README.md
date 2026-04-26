@@ -36,23 +36,27 @@ See example reports: [toolbar button](evals/samples/simple-toolbar-button/report
 
 ---
 
-> **Alpha** — This skill works but setup and configuration docs are incomplete. Expect some rough edges getting the MCP servers connected and configured. Better install/usage instructions are coming.
+> **Alpha** — This plugin has sharp edges and is still very much under construction. Expect rough edges and issues. Issue reports are appreciated.
 
 ## Prerequisites
 
-- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) with this plugin installed
+- **Sandboxed Firefox development environment** (e.g. virtual machine with [an HTTP network proxy](https://github.com/anthropic-experimental/sandbox-runtime/blob/main/src/sandbox/http-proxy.ts)).  
+  - Using this plugin outside of such an environment is **VERY STRONGLY DISCOURAGED**
+  - See also the "Guidelines" section of XXX.
+- [Claude Code](https://docs.anthropic.com/en/docs/claude-code)
 
-  ```
-  claude plugin marketplace add dmose/compare-figma-to-impl-skill
+- This plugin installed into Claude Code: 
+
+  ```bash
+  claude plugin marketplace add dmose/compare-figma-to-impl-skill && \
   claude plugin install compare-figma-to-impl@dmose-compare-figma-to-impl-skill
   ```
 
-- Reconfigured [Firefox DevTools MCP server] to use the binary and profile in the current Firefox tree/worktree
+- Firefox DevTools MCP server configured to use the binary and profile in the current Firefox tree/worktree
 
   1. Be sure you have `npx` in your `${PATH}`   
   2. Configure this Firefox directory to override the firefox-devtools MCP server arguments so that it starts Firefox from an objdir in this directory and uses the default profile in that objdir  
      - You may need to edit both instances of the objdir name in the example command below to refer to something other than `obj-aarch64-apple-darwin25.4.0`  
-     - XXX security warnings  
      - XXX discuss permissions
      - From a shell in the top-level of your firefox directory:
        ``` 

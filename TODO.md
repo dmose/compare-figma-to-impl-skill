@@ -18,11 +18,15 @@ Installation / configuration
 - [x] install & doc this plugin on test machine
 - [x] install figma deps on test machine
 - [x] test run (eval example?)
-- [ ] add security notes
-- [ ] document unreliability
-- [ ] loosen permission stuff in plugin
-- [ ] re-test 
-
+- [x] add security notes
+    - [x] Add strong sandbox verbiage.
+- [x] document unreliability
+- [ ] test in VM
+    - [x] clean up disk space
+    - [x] install linux
+    - [x] build firefox
+- [ ] review xxx comments
+- [ ] Find & Add link to sandboxing doc
 
 Reach out to testers
 - [ ] announce in #ai4dev
