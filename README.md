@@ -61,11 +61,13 @@ See example reports: [toolbar button](evals/samples/simple-toolbar-button/report
      - From a shell in the top-level of your firefox directory:
        ``` 
        claude mcp add --scope local firefox-devtools -- \
+          OBJDIR_SLUG = aarch64-apple-darwin25.4.0 \
+          FX_REL_PATH = Nightly.app/Contents/MacOS \
           ./mach npx @padenot/firefox-devtools-mcp \
           --firefoxPath \
-          ${PWD}/obj-aarch64-apple-darwin25.4.0/dist/Nightly.app/Contents/MacOS/firefox \
+          ${PWD}/obj-${OBJDIR_SLUG}/dist/${FX_REL_PATH}/firefox \
           --profilePath \
-          ${PWD}/obj-aarch64-apple-darwin25.4.0/tmp/profile-default \
+          ${PWD}/obj-${OBJDIR_SLUG}/tmp/profile-default \
           --enable-script \
           --enable-privileged-context \
           --env MOZ_REMOTE_ALLOW_SYSTEM_ACCESS=1 \
