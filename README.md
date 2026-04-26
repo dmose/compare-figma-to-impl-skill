@@ -54,7 +54,7 @@ See example reports: [toolbar button](evals/samples/simple-toolbar-button/report
 
 - Firefox DevTools MCP server configured to use the binary and profile in the current Firefox tree/worktree
 
-  1. Be sure you have `npx` in your `${PATH}`   
+  1. Node v20+ installed outside the tree with `npx` in your `${PATH}`.
   2. Configure this Firefox directory to override the firefox-devtools MCP server arguments so that it starts Firefox from an objdir in this directory and uses the default profile in that objdir  
      - You may need to edit both instances of the objdir name in the example command below to refer to something other than `obj-aarch64-apple-darwin25.4.0`  
      - XXX discuss permissions
