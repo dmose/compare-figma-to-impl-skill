@@ -63,9 +63,9 @@ See example reports: [toolbar button](evals/samples/simple-toolbar-button/report
        claude mcp add --scope local firefox-devtools -- \
           ./mach npx @padenot/firefox-devtools-mcp \
           --firefoxPath \
-          ${PWD}/obj-aarch64-unknown-linux-gnu/dist/bin/firefox \
+          ${PWD}/obj-aarch64-apple-darwin25.4.0/dist/Nightly.app/Contents/MacOS/firefox \
           --profilePath \
-          ${PWD}/obj-aarch64-unknown-linux-gnu/tmp/profile-default \
+          ${PWD}/obj-aarch64-apple-darwin25.4.0/tmp/profile-default \
           --enable-script \
           --enable-privileged-context \
           --env MOZ_REMOTE_ALLOW_SYSTEM_ACCESS=1 \
