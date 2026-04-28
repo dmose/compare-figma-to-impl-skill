@@ -93,8 +93,6 @@ See example reports: [toolbar button](evals/samples/simple-toolbar-button/report
     - Select that server.
     - Follow the prompts to authenticate using your browser.
 
-  - [Note] The REST API dependency (and use of FIGMA_TOKEN) is a stopgap we needed for getting good screenshots in the past.  We may not need it any more, and should get rid of it if not.
-
 ## Usage
 
 With the prerequisites running, invoke the skill from Claude Code:
@@ -107,3 +105,8 @@ With the prerequisites running, invoke the skill from Claude Code:
 ```
 4. This often takes 5-10 minutes on my machine, sometimes more.
 5. The report, with inline screenshots, should be written to `comparison/report.md` at the top of the Firefox source tree.
+
+## Known Major Issues
+1. A non-existent "Critical" blue border issue may be claimed in the report.
+2. 
+
