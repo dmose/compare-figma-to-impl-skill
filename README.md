@@ -2,7 +2,7 @@
 
 **Prototype Claude Code plugin for automated UI work breakdown and verification**
 
-_Cutting down the manual squinting, measuring, and comparing between Firefox and Figma while working on UI code with visual diff reports._
+_Cutting down the manual squinting & comparing between Firefox and Figma while working on UI code with visual diff reports._
 
 A single dropdown has lots of visual properties. Manually checking each one against Figma is slow, painful and error prone — font weight 700 instead of 590, gradient angle off by 34 degrees, padding short by 2.5px. Claude
 
