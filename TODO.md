@@ -21,17 +21,17 @@ Installation / configuration
 - [x] add security notes
     - [x] Add strong sandbox verbiage.
 - [x] document unreliability
-- [ ] test in VM
+- [x] test in VM
     - [x] clean up disk space
     - [x] install linux
     - [x] build firefox
-- [ ] review xxx comments
-- [ ] Find & Add link to sandboxing doc
+- [x] review xxx comments
 
 Reach out to testers
 - [ ] announce in #ai4dev
 
 Usability
+- [ ] as a developer, I don't want to have to mess with Figma Desktop, so that things are easier to install, and I want it to work on Linux, for sandboxing options and platform coverage.
 - [ ] as a developer, I am not incorrectly told that there is a solid blue border issue, so i don't waste time researching the wrong thing.  Likely issue: Figma UI affordance shouldn't part of design
 - [ ] as a developer, i see image pairs at the same scale/zoom, so i get a faster, clearer understanding of differences
 - [ ] as a developer, I see both images in a pair covering the same visual area, so I get a faster, clearer understanding of the differences

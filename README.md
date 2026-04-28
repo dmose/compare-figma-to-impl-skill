@@ -40,15 +40,15 @@ See example reports: [toolbar button](evals/samples/simple-toolbar-button/report
 
 ## Prerequisites
 
-- **Sandboxed Firefox development environment** (e.g. virtual machine with [an HTTP network proxy](https://github.com/anthropic-experimental/sandbox-runtime/blob/main/src/sandbox/http-proxy.ts)).  
-  - Using this plugin outside of such an environment is **VERY STRONGLY DISCOURAGED**
-  - See also the "Guidelines" section of XXX.
-- [Claude Code](https://docs.anthropic.com/en/docs/claude-code)
+- MacOS (Hasn't been tested on Windows, Linux port underway)
+
+- **Sandboxed Firefox development environment** (e.g. virtual machine with [an HTTP network proxy](https://github.com/anthropic-experimental/sandbox-runtime/blob/main/src/sandbox/http-proxy.ts)). For folks at Mozilla who have access, see also the "Guidelines" section of the "AI Coding and Development" doc on mozilla-hub.
+
+- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) (tested with terminal version)
 
 - This plugin installed into Claude Code: 
-
   ```bash
-  claude plugin marketplace add dmose/compare-figma-to-impl-skill && \
+  claude plugin marketplace add dmose/compare-figma-to-impl-skill
   claude plugin install compare-figma-to-impl@dmose-compare-figma-to-impl-skill
   ```
 
@@ -56,13 +56,12 @@ See example reports: [toolbar button](evals/samples/simple-toolbar-button/report
 
   1. Node v20+ installed outside the tree with `npx` in your `${PATH}`.
   2. Configure this Firefox directory to override the firefox-devtools MCP server arguments so that it starts Firefox from an objdir in this directory and uses the default profile in that objdir  
-     - You may need to edit both instances of the objdir name in the example command below to refer to something other than `obj-aarch64-apple-darwin25.4.0`  
-     - XXX discuss permissions
+     - You may need to edit both OBJDIR_SLUG and FX_REL_PATH in the shell command below to match your platform 
      - From a shell in the top-level of your firefox directory:
        ``` 
+       (export OBJDIR_SLUG=aarch64-apple-darwin25.4.0 \
+       FX_REL_PATH=Nightly.app/Contents/MacOS && \
        claude mcp add --scope local firefox-devtools -- \
-          OBJDIR_SLUG = aarch64-apple-darwin25.4.0 \
-          FX_REL_PATH = Nightly.app/Contents/MacOS \
           ./mach npx @padenot/firefox-devtools-mcp \
           --firefoxPath \
           ${PWD}/obj-${OBJDIR_SLUG}/dist/${FX_REL_PATH}/firefox \
@@ -72,14 +71,13 @@ See example reports: [toolbar button](evals/samples/simple-toolbar-button/report
           --enable-privileged-context \
           --env MOZ_REMOTE_ALLOW_SYSTEM_ACCESS=1 \
           --pref remote.prefs.recommended=false \
-          --pref browser.smartwindow.enabled=true
+          --pref browser.smartwindow.enabled=true)
        ```
   3. Test it. In the toplevel of your firefox dir, start claude, and then:
      1. Type `/mcp`  
      2. Ignore the `multiple scopes` warning
      3. Wait to make sure that firefox-devtools in the `Local MCP` section makes it to the `connected` state
      4. Tell it `use firefox-devtools mcp to open a firefox window`
-     5. `XXX approve the permission`  
      6. You should see a Firefox window!
 
 - Configure Figma
@@ -89,16 +87,18 @@ See example reports: [toolbar button](evals/samples/simple-toolbar-button/report
     - start claude
     - type `/mcp`
     - look for `plugin:figma:figma`, it will likely (eventually) say `needs authentication`
-    - Select that server
+    - Select that server.
     - Follow the prompts to authenticate using your browser.
 
-  - [Note] This is a super janky architecture for using Figma, but was needed at the beginning. With luck, we should now (or soon?) be able to switch the Figma Remote MCP, and drop the dependencies on Figma Desktop and the REST API. 
+  - [Note] This is a super janky architecture for using Figma, but was needed at the beginning.Switching to the Figma Remote MCP is a high priority in order make installs less painful, and support Linux, both for platform coverage and sandboxing options. Ideally we'd also drop the REST API dependency.
 
 ## Usage
 
 With the prerequisites running, invoke the skill from Claude Code:
 
 1. Start claude code
+2. Invoke the skill by command:
 ```
 /compare-figma-to-impl https://www.figma.com/design/FILE_KEY/File-Name?node-id=1-42 to the AI window header 
 ```
+3. The report should be written to `comparison/report.md` at the top of the Firefox source tree.
