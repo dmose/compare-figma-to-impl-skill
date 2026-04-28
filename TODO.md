@@ -19,7 +19,7 @@ Installation / configuration
 - [x] install figma deps on test machine
 - [x] test run (eval example?)
 - [x] add security notes
-    - [x] Add strong sandbox verbiage.
+    - [x] Add sandbox verbiage.
 - [x] document unreliability
 - [x] test in VM
     - [x] clean up disk space
@@ -31,8 +31,8 @@ Reach out to testers
 - [ ] announce in #ai4dev
 
 Usability
-- [ ] as a developer, I don't want to have to mess with Figma Desktop, so that things are easier to install, and I want it to work on Linux, for sandboxing options and platform coverage.
 - [ ] as a developer, I am not incorrectly told that there is a solid blue border issue, so i don't waste time researching the wrong thing.  Likely issue: Figma UI affordance shouldn't part of design
+- [ ] as a developer, I want it to work on Linux, for sandboxing options and platform coverage.
 - [ ] as a developer, i see image pairs at the same scale/zoom, so i get a faster, clearer understanding of differences
 - [ ] as a developer, I see both images in a pair covering the same visual area, so I get a faster, clearer understanding of the differences
 
@@ -44,7 +44,8 @@ Funnel refinement
     * ./mach python -c "import buildconfig; print(buildconfig.topobjdir)"
 - [ ] ease-of-installation: clean up Figma dependencies
     - [x] Use a marketplace.json with `allowCrossMarketplaceDependenciesOn` and a dependency in `plugin.json`
-    - [ ] see if we can switch to figma `remote mcp` and ditch the REST and desktop deps
+    - [x] see if we can switch to figma `remote mcp` and ditch the REST and desktop deps
+    - [ ] see if we can get rid of REST API usage
 - [ ] ease-of-installation: land better m-c .mcp.json defaults (bug in progress)
 
 general quality

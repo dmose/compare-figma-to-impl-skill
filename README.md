@@ -40,7 +40,9 @@ See example reports: [toolbar button](evals/samples/simple-toolbar-button/report
 
 ## Prerequisites
 
-- MacOS (Hasn't been tested on Windows, Linux port underway)
+- Supported OS
+  - MacOS
+  - Linux? (Not yet working on Apple Silicon. Might be better on x86. Expect issues either way.)
 
 - **Sandboxed Firefox development environment** (e.g. virtual machine with [an HTTP network proxy](https://github.com/anthropic-experimental/sandbox-runtime/blob/main/src/sandbox/http-proxy.ts)). For folks at Mozilla who have access, see also the "Guidelines" section of the "AI Coding and Development" doc on mozilla-hub.
 
@@ -81,8 +83,9 @@ See example reports: [toolbar button](evals/samples/simple-toolbar-button/report
      6. You should see a Firefox window!
 
 - Configure Figma
-  - Install Figma Desktop
-  - Get a Figma API token, and set it as `FIGMA_TOKEN` in the environment
+  - Install the official Claude Figma plugin:
+  ```claude plugin install figma@claude-plugins-official```
+  - Get a Figma API token, and set it as `FIGMA_TOKEN` in the environment that you will be starting claude from.
   - Authenticate to Figma
     - start claude
     - type `/mcp`
@@ -90,15 +93,17 @@ See example reports: [toolbar button](evals/samples/simple-toolbar-button/report
     - Select that server.
     - Follow the prompts to authenticate using your browser.
 
-  - [Note] This is a super janky architecture for using Figma, but was needed at the beginning.Switching to the Figma Remote MCP is a high priority in order make installs less painful, and support Linux, both for platform coverage and sandboxing options. Ideally we'd also drop the REST API dependency.
+  - [Note] The REST API dependency (and use of FIGMA_TOKEN) is a stopgap we needed for getting good screenshots in the past.  We may not need it any more, and should get rid of it if not.
 
 ## Usage
 
 With the prerequisites running, invoke the skill from Claude Code:
 
 1. Start claude code
-2. Invoke the skill by command:
+2. Find Figma node corresponding to the specific element you want to compare, and copy it so you can paste it into the command.
+3. Invoke the skill by command:
 ```
 /compare-figma-to-impl https://www.figma.com/design/FILE_KEY/File-Name?node-id=1-42 to the AI window header 
 ```
-3. The report should be written to `comparison/report.md` at the top of the Firefox source tree.
+4. This often takes 5-10 minutes on my machine, sometimes more.
+5. The report, with inline screenshots, should be written to `comparison/report.md` at the top of the Firefox source tree.
