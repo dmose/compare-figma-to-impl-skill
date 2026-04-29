@@ -100,15 +100,23 @@ See example reports: [toolbar button](evals/samples/simple-toolbar-button/report
 With the prerequisites running, invoke the skill from Claude Code:
 
 1. Start claude code
-2. Find Figma node corresponding to the specific element you want to compare, and copy it so you can paste it into the command.
-3. Invoke the skill by command:
+2. If the UI you're interested in is not in the main Firefox window, it's often helpful to get the devtools-mcp to open Firefox so that the UI you care about is visible
+   * common case:
+     - tell Claude ```open a browser window using the firefox-devtools mcp```
+     - after the browser starts, navigate by hand until the thing you want to work on is visible
+   * SmartWindow case
+     - tell Claude ```/open-ai-window```
+     - once it's open, ```/open-smartbar-dropdown``` is also available
+  
+3. Find Figma node corresponding to the specific element you want to compare, and copy it so you can paste it into the command.
+4. Invoke the skill by command:
 ```
 /compare-figma-to-impl https://www.figma.com/design/FILE_KEY/File-Name?node-id=1-42 to the AI window header 
 ```
-4. This often takes 5-10 minutes on my machine, sometimes more.
-5. The report, with inline screenshots, should be written to `comparison/report.md` at the top of the Firefox source tree.
+5. This often takes 5-10 minutes on my machine, sometimes more.
+6. The report, with inline screenshots, should be written to `comparison/report.md` at the top of the Firefox source tree.
 
 ## Known Major Issues
 1. A non-existent "Critical" blue border issue may be claimed in the report.
-2. 
+
 
