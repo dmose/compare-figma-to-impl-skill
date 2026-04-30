@@ -2,7 +2,7 @@
 
 **Prototype Claude Code plugin for automated UI work breakdown and verification**
 
-_Cutting down the manual squinting & comparing between Firefox and Figma while working on UI code with visual diff reports._
+_Cutting down the manual squinting & comparing between Firefox and Figma while working on UI code with a rough draft visual diff report._
 
 A single dropdown has lots of visual properties. Manually checking each one against Figma is slow, painful and error prone — font weight 700 instead of 590, gradient angle off by 34 degrees, padding short by 2.5px. Claude
 
@@ -26,13 +26,13 @@ Point it at a Figma URL and a running UI in Firefox:
 
 ### Use it before you code
 
-Run the comparison before you start implementing and the output is your checklist — every property the implementation needs to match, with exact values. Feed it to an LLM coding agent as acceptance criteria, or use it as a reference yourself.
+Run the comparison before you start implementing and the output is your rough draft work breakdown, with specifics and visuals. 
 
 ```
 /compare-figma-to-impl https://www.figma.com/design/FILE_KEY/File-Name?node-id=1-42 to the smartbar dropdown
 ```
 
-Run it after implementation to catch mismatches before review. Each discrepancy is classified as Critical (visually broken), Minor (measurable difference), or Non-issue (numerically different but visually identical). The report includes side-by-side screenshots for each finding.
+Run it after implementation to see a rough draft report of how close your changes are. Each discrepancy is classified as Critical (visually broken), Minor (measurable difference), or Non-issue (numerically different but visually identical). The report includes side-by-side screenshots for each finding.
 
 See example reports: [toolbar button](evals/samples/simple-toolbar-button/report.md) | [smartbar dropdown](evals/samples/aiwindow-smartbar-dropdown/report.md)
 
@@ -87,7 +87,7 @@ See example reports: [toolbar button](evals/samples/simple-toolbar-button/report
 - Configure Figma
   - Install the official Claude Figma plugin:
   ```claude plugin install figma@claude-plugins-official```
-  - Get a Figma API token, and set it as `FIGMA_TOKEN` in the environment that you will be starting claude from.
+  - Get a Figma API token, and set it as `FIGMA_TOKEN` in the environment that you will be starting claude from. (Note that this isn't needed for the MCP server, but because this plugin uses the REST API too)
   - Authenticate to Figma
     - start claude
     - type `/mcp`
@@ -108,7 +108,7 @@ With the prerequisites running, invoke the skill from Claude Code:
      - tell Claude ```/open-ai-window```
      - once it's open, ```/open-smartbar-dropdown``` is also available
   
-3. Find Figma node corresponding to the specific element you want to compare, and copy it so you can paste it into the command.
+3. Find the Figma node corresponding to the specific element you want to compare, and copy it so you can paste it into the command.
 4. Invoke the skill by command:
 ```
 /compare-figma-to-impl https://www.figma.com/design/FILE_KEY/File-Name?node-id=1-42 to the AI window header 
@@ -118,5 +118,5 @@ With the prerequisites running, invoke the skill from Claude Code:
 
 ## Known Major Issues
 1. A non-existent "Critical" blue border issue may be claimed in the report.
-
+2. Sometimes a text-only report is generated in Claude Code but not written to disk.
 
