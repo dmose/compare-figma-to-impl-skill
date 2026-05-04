@@ -55,6 +55,7 @@ See example reports: [toolbar button](evals/samples/simple-toolbar-button/report
   claude plugin marketplace add dmose/compare-figma-to-impl
   claude plugin install compare-figma-to-impl@dmose-compare-figma-to-impl
   ```
+  - After install, enable auto-update for this marketplace via the `/plugin` menu in Claude Code to receive future updates (third-party marketplaces are opted out by default).
 
 - Firefox DevTools MCP server configured to use the binary and profile in the current Firefox tree/worktree
 
