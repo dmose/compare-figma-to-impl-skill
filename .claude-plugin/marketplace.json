@@ -1,6 +1,6 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "dmose-compare-figma-to-impl-skill",
+  "name": "dmose-compare-figma-to-impl",
   "description": "Systematically compare a live Firefox UI element against a Figma design, producing a structured report with side-by-side screenshots and discrepancy analysis.",
   "owner": {
     "name": "Dan Mosedale",

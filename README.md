@@ -52,8 +52,8 @@ See example reports: [toolbar button](evals/samples/simple-toolbar-button/report
 
 - This plugin installed into Claude Code: 
   ```bash
-  claude plugin marketplace add dmose/compare-figma-to-impl-skill
-  claude plugin install compare-figma-to-impl@dmose-compare-figma-to-impl-skill
+  claude plugin marketplace add dmose/compare-figma-to-impl
+  claude plugin install compare-figma-to-impl@dmose-compare-figma-to-impl
   ```
 
 - Firefox DevTools MCP server configured to use the binary and profile in the current Firefox tree/worktree
