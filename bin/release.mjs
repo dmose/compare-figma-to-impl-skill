@@ -4,8 +4,9 @@ import { execSync } from "node:child_process";
 import { readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { createInterface } from "node:readline";
+import { fileURLToPath } from "node:url";
 
-const ROOT = new URL("..", import.meta.url).pathname.replace(/\/$/, "");
+const ROOT = join(fileURLToPath(import.meta.url), "../..");
 const PLUGIN_JSON = join(ROOT, ".claude-plugin", "plugin.json");
 const CHANGELOG = join(ROOT, "CHANGELOG.md");
 const REPO_URL = "https://github.com/dmose/compare-figma-to-impl";
@@ -66,6 +67,11 @@ if (behind !== "0") {
 const mainAhead = run("git rev-list develop..origin/main --count");
 if (mainAhead !== "0") {
   die("origin/main has commits not on develop. Rebase develop onto main first.");
+}
+
+const localMainDiverged = run("git rev-list origin/main..main --count");
+if (localMainDiverged !== "0") {
+  die("Local main has diverged from origin/main. Reconcile before releasing.");
 }
 
 const newOnDevelop = run("git log --oneline origin/main..develop");
@@ -165,9 +171,9 @@ try {
 
 const pushConfirm = await ask("\nPush main, develop, and tags to origin? (y/n) [y]: ");
 if (pushConfirm && pushConfirm.toLowerCase() !== "y") {
-  console.log("Skipped push. Run manually:\n  git push origin main develop --tags");
+  console.log(`Skipped push. Run manually:\n  git push --atomic origin main develop v${newVersion}`);
   process.exit(0);
 }
 
-run("git push origin main develop --tags");
+run(`git push --atomic origin main develop v${newVersion}`);
 console.log(`\nReleased v${newVersion}`);
