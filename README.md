@@ -46,7 +46,7 @@ See example reports: [toolbar button](evals/samples/simple-toolbar-button/report
   - MacOS
   - Linux? (Not yet working on Apple Silicon. Might be better on x86. Expect issues either way.)
 
-- **Sandboxed Firefox development environment** (e.g. virtual machine with [an HTTP network proxy](https://github.com/anthropic-experimental/sandbox-runtime/blob/main/src/sandbox/http-proxy.ts)). For folks at Mozilla who have access, see also the "Guidelines" section of the "AI Coding and Development" doc on mozilla-hub.
+- Sandboxed Firefox development environment (e.g. virtual machine with [an HTTP network proxy](https://github.com/anthropic-experimental/sandbox-runtime/blob/main/src/sandbox/http-proxy.ts)). For folks at Mozilla who have access, see also the "Guidelines" section of the "AI Coding and Development" doc on mozilla-hub.
 
 - [Claude Code](https://docs.anthropic.com/en/docs/claude-code) (tested with terminal version)
 
@@ -64,19 +64,20 @@ See example reports: [toolbar button](evals/samples/simple-toolbar-button/report
      - You may need to edit both OBJDIR_SLUG and FX_REL_PATH in the shell command below to match your platform 
      - From a shell in the top-level of your firefox directory:
        ``` 
-       (export OBJDIR_SLUG=aarch64-apple-darwin25.4.0 \
-       FX_REL_PATH=Nightly.app/Contents/MacOS && \
-       claude mcp add --scope local firefox-devtools -- \
-          ./mach npx @padenot/firefox-devtools-mcp \
-          --firefoxPath \
-          ${PWD}/obj-${OBJDIR_SLUG}/dist/${FX_REL_PATH}/firefox \
-          --profilePath \
-          ${PWD}/obj-${OBJDIR_SLUG}/tmp/profile-default \
-          --enable-script \
-          --enable-privileged-context \
-          --env MOZ_REMOTE_ALLOW_SYSTEM_ACCESS=1 \
-          --pref remote.prefs.recommended=false \
-          --pref browser.smartwindow.enabled=true)
+       (export 
+          OBJDIR=`./mach python -c "from mozbuild.base import MozbuildObject; print (MozbuildObject.from_environment().topobjdir)"` \
+          FX_PATH= `./mach python -c "from mozbuild.base import MozbuildObject;"` print(MozbuildObject.from_environment().topobjdir)" \
+          claude mcp add --scope local firefox-devtools -- \
+            ./mach npx @padenot/firefox-devtools-mcp \
+            --firefoxPath \
+            ${FX_PATH} \
+            --profilePath \
+            ${$OBJDIR}/tmp/profile-default \
+            --enable-script \
+            --enable-privileged-context \
+            --env MOZ_REMOTE_ALLOW_SYSTEM_ACCESS=1 \
+            --pref remote.prefs.recommended=false \
+            --pref browser.smartwindow.enabled=true)
        ```
   3. Test it. In the toplevel of your firefox dir, start claude, and then:
      1. Type `/mcp`  
