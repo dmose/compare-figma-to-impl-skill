@@ -66,13 +66,13 @@ See example reports: [toolbar button](evals/samples/simple-toolbar-button/report
        ``` 
        (export 
           OBJDIR=`./mach python -c "from mozbuild.base import MozbuildObject; print (MozbuildObject.from_environment().topobjdir)"` \
-          FX_PATH= `./mach python -c "from mozbuild.base import MozbuildObject;"` print(MozbuildObject.from_environment().topobjdir)" \
+          FX_PATH=`./mach python -c "from mozbuild.base import MozbuildObject;"` print(MozbuildObject.from_environment().topobjdir)" \
           claude mcp add --scope local firefox-devtools -- \
             ./mach npx @padenot/firefox-devtools-mcp \
             --firefoxPath \
             ${FX_PATH} \
             --profilePath \
-            ${$OBJDIR}/tmp/profile-default \
+            ${OBJDIR}/tmp/profile-default \
             --enable-script \
             --enable-privileged-context \
             --env MOZ_REMOTE_ALLOW_SYSTEM_ACCESS=1 \
