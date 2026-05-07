@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Clarify README setup instructions: simplify sandboxed environment description,
+  remove unnecessary note about editing build variables, and add troubleshooting
+  contact info for MCP setup
+
 ## [0.1.2] - 2026-05-05
 
 ### Added
