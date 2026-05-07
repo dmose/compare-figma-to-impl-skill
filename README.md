@@ -46,7 +46,7 @@ See example reports: [toolbar button](evals/samples/simple-toolbar-button/report
   - MacOS
   - Linux? (Not yet working on Apple Silicon. Might be better on x86. Expect issues either way.)
 
-- Sandboxed Firefox development environment (e.g. virtual machine with [an HTTP network proxy](https://github.com/anthropic-experimental/sandbox-runtime/blob/main/src/sandbox/http-proxy.ts)). For folks at Mozilla who have access, see also the "Guidelines" section of the "AI Coding and Development" doc on mozilla-hub.
+- Recommended: a sandboxed Firefox development environment (e.g. virtual machine with [an HTTP network proxy](https://github.com/anthropic-experimental/sandbox-runtime/blob/main/src/sandbox/http-proxy.ts)
 
 - [Claude Code](https://docs.anthropic.com/en/docs/claude-code) (tested with terminal version)
 
@@ -61,7 +61,6 @@ See example reports: [toolbar button](evals/samples/simple-toolbar-button/report
 
   1. Node v20+ installed outside the tree with `npx` in your `${PATH}`.
   2. Configure this Firefox directory to override the firefox-devtools MCP server arguments so that it starts Firefox from an objdir in this directory and uses the default profile in that objdir  
-     - You may need to edit both OBJDIR_SLUG and FX_REL_PATH in the shell command below to match your platform 
      - From a shell in the top-level of your firefox directory:
        ``` 
        (export 
@@ -81,8 +80,8 @@ See example reports: [toolbar button](evals/samples/simple-toolbar-button/report
        ```
   3. Test it. In the toplevel of your firefox dir, start claude, and then:
      1. Type `/mcp`  
-     2. Ignore the `multiple scopes` warning
-     3. Wait to make sure that firefox-devtools in the `Local MCP` section makes it to the `connected` state
+     2. Ignore the `Conflicting scopes` warning if you see it
+     3. Wait to make sure that firefox-devtools in the `Local MCP` section makes it to the `connected` state. If not, please reach out to @dmose Slack or on Element for help/feedback.
      4. Tell it `use firefox-devtools mcp to open a firefox window`
      6. You should see a Firefox window!
 
