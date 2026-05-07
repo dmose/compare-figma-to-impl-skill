@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.3] - 2026-05-06
+
 ### Changed
 - Clarify README setup instructions: simplify sandboxed environment description,
   remove unnecessary note about editing build variables, and add troubleshooting
@@ -46,7 +48,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - .env.sample for Figma token configuration
 - Firefox Nightly config and firefox-devtools-mcp integration
 
-[Unreleased]: https://github.com/dmose/compare-figma-to-impl/compare/v0.1.2...HEAD
+[Unreleased]: https://github.com/dmose/compare-figma-to-impl/compare/v0.1.3...HEAD
+[0.1.3]: https://github.com/dmose/compare-figma-to-impl/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/dmose/compare-figma-to-impl/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/dmose/compare-figma-to-impl/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/dmose/compare-figma-to-impl/commits/v0.1.1
