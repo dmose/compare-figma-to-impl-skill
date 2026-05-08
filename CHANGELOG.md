@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Expand auto-update instructions in README with step-by-step guide
   and link to Claude Code docs (thanks to @flozia for the suggestion)
+- Fix MCP setup command: use `npx` directly instead of `./mach npx`
+  (thanks to @flozia for the suggestion)
 
 ### Fixed
 - Remove invalid `permissions` key from plugin.json that caused
