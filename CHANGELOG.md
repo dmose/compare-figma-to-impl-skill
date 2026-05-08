@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- Remove invalid `permissions` key from plugin.json that caused
+  installation failures (thanks to @flozia for reporting this)
+- Fix `dependencies` format: use string identifier instead of object
+  with unsupported `marketplace` key (thanks to @flozia for reporting this)
+
 ## [0.1.3] - 2026-05-06
 
 ### Changed
