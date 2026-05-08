@@ -73,7 +73,7 @@ See example reports: [toolbar button](evals/samples/simple-toolbar-button/report
        ``` 
        (export 
           OBJDIR=`./mach python -c "from mozbuild.base import MozbuildObject; print(MozbuildObject.from_environment().topobjdir)"` \
-          FX_PATH=`./mach python -c "from mozbuild.base import MozbuildObject; print(MozbuildObject.from_environment().topobjdir)"` \
+          FX_PATH=`./mach python -c 'from mozbuild.base import MozbuildObject; print(MozbuildObject.from_environment().get_binary_path())'` \
           claude mcp add --scope local firefox-devtools -- \
             npx @padenot/firefox-devtools-mcp \
             --firefoxPath \
