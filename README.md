@@ -96,7 +96,7 @@ See example reports: [toolbar button](evals/samples/simple-toolbar-button/report
 - Configure Figma
   - Install the official Claude Figma plugin:
   ```bash
-  claude marketplace add anthropics/claude-plugins-official
+  claude plugin marketplace add anthropics/claude-plugins-official
   claude plugin install figma@claude-plugins-official
   ```
   - Get a Figma API token, and set it as `FIGMA_TOKEN` in the environment that you will be starting claude from. (Note that this isn't needed for the MCP server, but because this plugin uses the REST API too)

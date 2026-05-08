@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Document known issue: `/open-ai-window` can loop when a Firefox instance
   already holds the profile directory
 
+### Fixed
+- Fix marketplace install command: `claude marketplace add` →
+  `claude plugin marketplace add`
+
 ## [0.1.4] - 2026-05-07
 
 ### Added
