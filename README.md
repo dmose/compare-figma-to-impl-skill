@@ -50,7 +50,7 @@ See example reports: [toolbar button](evals/samples/simple-toolbar-button/report
 
 - [Claude Code](https://docs.anthropic.com/en/docs/claude-code) (tested with terminal version)
 
-- This plugin installed into Claude Code: 
+- This plugin and the main plugin marketplace installed into Claude Code: 
   ```bash
   claude plugin marketplace add dmose/compare-figma-to-impl
   claude plugin install compare-figma-to-impl@dmose-compare-figma-to-impl
@@ -131,4 +131,5 @@ With the prerequisites running, invoke the skill from Claude Code:
 ## Known Major Issues
 1. A non-existent "Critical" blue border issue may be claimed in the report.
 2. Sometimes a text-only report is generated in Claude Code but not written to disk.
+3. If there's already a version of Firefox running on the ${OBJDIR}/tmp/profile-default profile, `/open-ai-window` may get stuck in a loop opening windows. Workaround: quit the looping Firefox, quit `claude`, quit any existing running Firefoxes from that worktree/tree that were started by `./mach run`, and follow the Usage Section intructions in this doc again.
 
