@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Changed
+- Bump Node.js prerequisite from v20+ to v22+
+- Add explicit prerequisite that Firefox tree must have been built and run at least once
 - Expand auto-update instructions in README with step-by-step guide
   and link to Claude Code docs (thanks to @flozia for the suggestion)
 - Fix MCP setup command: use `npx` directly instead of `./mach npx`

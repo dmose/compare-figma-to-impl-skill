@@ -64,10 +64,10 @@ See example reports: [toolbar button](evals/samples/simple-toolbar-button/report
     5. Select `Enable auto-update`
 
     If you have issues see the [Claude Code Docs Page](https://code.claude.com/docs/en/discover-plugins#configure-auto-updates) for more details.
-
+- A Firefox tree/worktree that has been built and run at least once
 - Firefox DevTools MCP server configured to use the binary and profile in the current Firefox tree/worktree
 
-  1. Node v20+ installed outside the tree with `npx` in your `${PATH}`.
+  1. Node v22+ installed outside the tree with `npx` in your `${PATH}`.
   2. Configure this Firefox directory to override the firefox-devtools MCP server arguments so that it starts Firefox from an objdir in this directory and uses the default profile in that objdir  
      - From a shell in the top-level of your firefox directory:
        ``` 
