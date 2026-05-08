@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- UNINSTALL.md with instructions for removing the plugin and MCP server
+
 ### Changed
 - Bump Node.js prerequisite from v20+ to v22+
 - Add explicit prerequisite that Firefox tree must have been built and run at least once
@@ -16,8 +19,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   (thanks to @flozia for the suggestion)
 - Fix MCP setup command: use `get_binary_path()` for `FX_PATH` instead
   of `topobjdir` to point at the actual Firefox binary
+- Fix Figma plugin install instructions: add missing `marketplace add`
+  command for the official Claude plugins marketplace
 
 ### Fixed
+- Fix MCP setup shell command: `export` swallowed `claude mcp add` as
+  a variable assignment so the server was never configured
 - Remove invalid `permissions` key from plugin.json that caused
   installation failures (thanks to @flozia for reporting this)
 - Fix `dependencies` format: use string identifier instead of object

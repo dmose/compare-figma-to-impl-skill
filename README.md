@@ -71,20 +71,20 @@ See example reports: [toolbar button](evals/samples/simple-toolbar-button/report
   2. Configure this Firefox directory to override the firefox-devtools MCP server arguments so that it starts Firefox from an objdir in this directory and uses the default profile in that objdir  
      - From a shell in the top-level of your firefox directory:
        ``` 
-       (export 
+       (export \
           OBJDIR=`./mach python -c "from mozbuild.base import MozbuildObject; print(MozbuildObject.from_environment().topobjdir)"` \
-          FX_PATH=`./mach python -c 'from mozbuild.base import MozbuildObject; print(MozbuildObject.from_environment().get_binary_path())'` \
-          claude mcp add --scope local firefox-devtools -- \
-            npx @padenot/firefox-devtools-mcp \
-            --firefoxPath \
-            ${FX_PATH} \
-            --profilePath \
-            ${OBJDIR}/tmp/profile-default \
-            --enable-script \
-            --enable-privileged-context \
-            --env MOZ_REMOTE_ALLOW_SYSTEM_ACCESS=1 \
-            --pref remote.prefs.recommended=false \
-            --pref browser.smartwindow.enabled=true)
+          FX_PATH=`./mach python -c 'from mozbuild.base import MozbuildObject; print(MozbuildObject.from_environment().get_binary_path())'`
+        claude mcp add --scope local firefox-devtools -- \
+          npx @padenot/firefox-devtools-mcp \
+          --firefoxPath \
+          ${FX_PATH} \
+          --profilePath \
+          ${OBJDIR}/tmp/profile-default \
+          --enable-script \
+          --enable-privileged-context \
+          --env MOZ_REMOTE_ALLOW_SYSTEM_ACCESS=1 \
+          --pref remote.prefs.recommended=false \
+          --pref browser.smartwindow.enabled=true)
        ```
   3. Test it. In the toplevel of your firefox dir, start claude, and then:
      1. Type `/mcp`  
@@ -95,7 +95,10 @@ See example reports: [toolbar button](evals/samples/simple-toolbar-button/report
 
 - Configure Figma
   - Install the official Claude Figma plugin:
-  ```claude plugin install figma@claude-plugins-official```
+  ```bash
+  claude marketplace add anthropics/claude-plugins-official
+  claude plugin install figma@claude-plugins-official
+  ```
   - Get a Figma API token, and set it as `FIGMA_TOKEN` in the environment that you will be starting claude from. (Note that this isn't needed for the MCP server, but because this plugin uses the REST API too)
   - Authenticate to Figma
     - start claude
