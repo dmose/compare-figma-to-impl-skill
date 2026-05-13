@@ -121,7 +121,10 @@ With the prerequisites running, invoke the skill from Claude Code:
      - once it's open, ```/open-smartbar-dropdown``` is also available
   
 3. Find the Figma node corresponding to the specific element you want to compare, and copy it so you can paste it into the command.
-4. Invoke the skill by command:
+   - Be sure you're in [Dev Mode](https://help.figma.com/hc/en-us/articles/15023124644247-Guide-to-Dev-Mode).
+   - Click the "Share" button in the top right of Figma UI
+   - Click "Copy link" at the top right of the popup "Share" menu
+4. Go back to Claude Code and invoke the skill by command, including any specific instructions about what specifically the Figma node should be compared to, and, optionally, how.
 ```
 /compare-figma-to-impl https://www.figma.com/design/FILE_KEY/File-Name?node-id=1-42 to the AI window header 
 ```
