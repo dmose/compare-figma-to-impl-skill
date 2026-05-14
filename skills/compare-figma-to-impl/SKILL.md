@@ -17,9 +17,9 @@ Systematically compare a Figma design to a live Firefox implementation
 using the Figma MCP and Firefox devtools MCP. Produce a structured
 comparison covering layout, structure, and styling.
 
-> **YOUR #1 JOB**: The deliverable is `comparison/report.md` on disk,
-> NOT conversation text. See the **Output Format** section at the end
-> for exact requirements.
+> **YOUR #1 JOB**: End every successful run by using the **Write** tool
+> to save the report to `comparison/report.md`. See **Phase 7** for the
+> exact steps and **Report Schema** for the content shape.
 
 ## Prerequisites
 
@@ -291,36 +291,48 @@ Before presenting results, review the analysis for common errors:
   implementation uses a design token that maps to the correct semantic value,
   even if the pixel value differs slightly from the Figma spec.
 
-## Output Format
+### Phase 7: Save and Verify the Report
 
-**YOUR FINAL TOOL CALL MUST BE `Write` to `comparison/report.md`.**
-Create the directory first if needed (`mkdir -p comparison`). Do not
-print the full report to the conversation — the file IS the deliverable.
-If you find yourself generating the report as conversation text, STOP
-and use the Write tool instead.
+This is the final step. The deliverable is the file on disk, not the
+conversation text.
 
-After the Write call, reply with a short summary (≤5 sentences):
-- Number of critical / minor / non-issue discrepancies
-- The single most important finding
-- The file path where the report was saved
+1. Use the **Write** tool to save the full markdown report to
+   `comparison/report.md`. The content shape is defined in the
+   **Report Schema** section below. Create the directory first if
+   needed (`mkdir -p comparison`).
+2. Run `Bash: ls -la comparison/report.md` as a self-check that the
+   file exists.
+3. Reply with a ≤5-sentence summary:
+   - Number of critical / minor / non-issue discrepancies
+   - The single most important finding
+   - The file path where the report was saved
 
-The report must be a structured markdown document using these exact
-section headers (as markdown ## headings):
+   Do NOT print the full report content to the conversation — the file
+   on disk IS the deliverable.
 
-## Context
-What's being compared — the Figma node, the live UI element, and any
-relevant URLs or selectors.
+Note: the `ls` in step 2 is a nudge for your own check. The actual
+enforcement is a `SubagentStop` hook shipped with this plugin — it
+blocks the subagent from stopping until `comparison/report.md` exists
+and is non-empty.
 
+## Report Schema
 
-## Summary of Discrepancies
-Categorize each finding as Critical, Minor, or Non-issue under
-`### Critical`, `### Minor`, and `### Non-issue` sub-headings.
+The report at `comparison/report.md` must be a structured markdown
+document using these section headers (each one a literal `##` heading
+in the report):
+
+**`## Context`** — What's being compared: the Figma node, the live UI
+element, and any relevant URLs or selectors.
+
+**`## Summary of Discrepancies`** — Categorize each finding as
+Critical, Minor, or Non-issue under `### Critical`, `### Minor`, and
+`### Non-issue` sub-headings.
 
 Each individual discrepancy must have its own screenshot table showing
 the relevant area, with the Figma crop on the left and implementation
 crop on the right. Use unique filenames per discrepancy:
 
-```
+```markdown
 1. **Border color mismatch**: Description of the issue...
 
 | Figma | Implementation |
@@ -331,14 +343,14 @@ crop on the right. Use unique filenames per discrepancy:
 Every severity level (Critical, Minor, Non-issue) gets screenshot
 tables. Sections with no discrepancies should contain only "None.".
 
-If the user asks for a plan to fix, add a Changes section with specific
-file paths, line numbers, and code snippets using design tokens where
-available.
+If the user asks for a plan to fix, add a `## Changes` section with
+specific file paths, line numbers, and code snippets using design
+tokens where available.
 
-## Layout & Styling
-Table(s) comparing all visual properties — layout (dimensions, spacing,
-positioning, flex/grid), styling (colors, borders, typography, shadows,
-opacity) — between Figma and implementation.
+**`## Layout & Styling`** — Table(s) comparing all visual properties:
+layout (dimensions, spacing, positioning, flex/grid), styling (colors,
+borders, typography, shadows, opacity) — between Figma and
+implementation.
 
 ## Additional Resources
 
