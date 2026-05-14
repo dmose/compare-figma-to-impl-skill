@@ -1,0 +1,15 @@
+{
+  "description": "Enforce report.md write for the compare-figma-to-impl skill",
+  "hooks": {
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/check-report-written.sh\""
+          }
+        ]
+      }
+    ]
+  }
+}
