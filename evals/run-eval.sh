@@ -57,6 +57,8 @@ else
   fi
 fi
 
+EVAL_START_TS=0
+
 if [ "$GRADE_ONLY" = false ]; then
   DEFAULT_PROMPT='Use the compare-figma-to-impl skill to compare the four icon buttons in the top left corner of the firefox main window to
 @https://www.figma.com/design/5KuePTGmOEUFyCHBHCsGim/AI-Mode-%E2%80%94%C2%A0MVP-Scope-Design?node-id=8559-44226&m=dev'
@@ -70,6 +72,10 @@ if [ "$GRADE_ONLY" = false ]; then
   echo "=== Running skill via claude -p ==="
   echo "Prompt: $PROMPT"
   echo ""
+
+  # Record start time so we can verify report.md was written during this run
+  # (not left over from a prior run, in case the rm -rf above is ever changed).
+  EVAL_START_TS=$(date +%s)
 
   (cd "$REPO_ROOT" && echo "$PROMPT" | claude -p --verbose --output-format stream-json \
     --allowedTools "Bash Write Read Edit Glob Grep Skill mcp__plugin_figma_figma__get_design_context mcp__plugin_figma_figma__get_screenshot mcp__plugin_figma_figma__get_metadata mcp__firefox-devtools__take_snapshot mcp__firefox-devtools__screenshot_page mcp__firefox-devtools__screenshot_by_uid mcp__firefox-devtools__evaluate_script mcp__firefox-devtools__evaluate_chrome_script mcp__firefox-devtools__list_chrome_contexts mcp__firefox-devtools__select_chrome_context mcp__firefox-devtools__list_pages mcp__firefox-devtools__select_page" \
@@ -108,6 +114,56 @@ if [ "$FIGMA_TOKEN_VALID" = true ]; then
   else
     echo "  FAIL: $REPORT_FILE was not created"
     fail=$((fail + 1))
+  fi
+
+  # Check 2b: report.md was actually written DURING this run (not left over).
+  # Skipped in grade-only mode where EVAL_START_TS=0.
+  if [ "$EVAL_START_TS" -gt 0 ]; then
+    total=$((total + 1))
+    if [ -f "$REPORT_FILE" ]; then
+      # Portable mtime: BSD `stat -f %m` on macOS, GNU `stat -c %Y` on Linux.
+      REPORT_MTIME=$(stat -f %m "$REPORT_FILE" 2>/dev/null || stat -c %Y "$REPORT_FILE" 2>/dev/null || echo 0)
+      if [ "$REPORT_MTIME" -ge "$EVAL_START_TS" ]; then
+        echo "  PASS: report.md was written during this run (mtime $REPORT_MTIME >= start $EVAL_START_TS)"
+        pass=$((pass + 1))
+      else
+        echo "  FAIL: report.md mtime ($REPORT_MTIME) is older than eval start ($EVAL_START_TS) — file is stale"
+        fail=$((fail + 1))
+      fi
+    else
+      echo "  FAIL: report.md missing, can't check mtime"
+      fail=$((fail + 1))
+    fi
+  fi
+
+  # Info-only: did a Write tool_use to comparison/report.md appear in the main
+  # stream-json? May be absent if the Write happened inside the forked subagent
+  # whose tool_use events don't bubble up to the parent stream. Diagnostic only.
+  if [ -f "$CLAUDE_OUTPUT" ]; then
+    WRITE_HITS=$(python3 - "$CLAUDE_OUTPUT" <<'PY' 2>/dev/null || echo 0
+import json, sys
+path = sys.argv[1]
+hits = 0
+with open(path) as f:
+    for line in f:
+        line = line.strip()
+        if not line: continue
+        try: obj = json.loads(line)
+        except Exception: continue
+        if obj.get("type") != "assistant": continue
+        for b in obj.get("message", {}).get("content", []):
+            if b.get("type") == "tool_use" and b.get("name") == "Write":
+                fp = b.get("input", {}).get("file_path", "")
+                if fp.endswith("comparison/report.md"):
+                    hits += 1
+print(hits)
+PY
+)
+    if [ "${WRITE_HITS:-0}" -gt 0 ]; then
+      echo "  INFO: $WRITE_HITS Write call(s) to comparison/report.md observed in main stream"
+    else
+      echo "  INFO: no Write to comparison/report.md in main stream (likely written inside subagent — see SubagentStop hook)"
+    fi
   fi
 
   # Check 3: figma-screenshot.png exists
