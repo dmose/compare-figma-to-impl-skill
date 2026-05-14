@@ -17,6 +17,10 @@ Systematically compare a Figma design to a live Firefox implementation
 using the Figma MCP and Firefox devtools MCP. Produce a structured
 comparison covering layout, structure, and styling.
 
+> **YOUR #1 JOB**: The deliverable is `comparison/report.md` on disk,
+> NOT conversation text. See the **Output Format** section at the end
+> for exact requirements.
+
 ## Prerequisites
 
 - The Firefox devtools MCP must be connected
@@ -289,12 +293,16 @@ Before presenting results, review the analysis for common errors:
 
 ## Output Format
 
-**CRITICAL**: You MUST save the report to a file — do not just print it
-to the conversation. After completing the analysis, use the Write tool to
-save the full report to `comparison/report.md` (create the `comparison/`
-directory first with `mkdir -p comparison` if needed). Then briefly
-summarize the findings in the conversation and tell the user the report
-was saved.
+**YOUR FINAL TOOL CALL MUST BE `Write` to `comparison/report.md`.**
+Create the directory first if needed (`mkdir -p comparison`). Do not
+print the full report to the conversation — the file IS the deliverable.
+If you find yourself generating the report as conversation text, STOP
+and use the Write tool instead.
+
+After the Write call, reply with a short summary (≤5 sentences):
+- Number of critical / minor / non-issue discrepancies
+- The single most important finding
+- The file path where the report was saved
 
 The report must be a structured markdown document using these exact
 section headers (as markdown ## headings):
