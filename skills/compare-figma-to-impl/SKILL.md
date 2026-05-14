@@ -45,12 +45,31 @@ comparison covering layout, structure, and styling.
    mkdir -p comparison
    IMG_URL=$(curl -sH "X-Figma-Token: $FIGMA_TOKEN" \
      "https://api.figma.com/v1/images/${FILE_KEY}?ids=${NODE_ID}&format=png&scale=2&contents_only=false" \
-     | python3 -c "import sys,json; print(list(json.load(sys.stdin)['images'].values())[0])")
+     | python3 -c '
+   import sys, json
+   try:
+       data = json.load(sys.stdin)
+   except Exception as e:
+       print(f"ERROR: Figma API returned non-JSON: {e}", file=sys.stderr)
+       sys.exit(1)
+   err = data.get("err")
+   if err:
+       print(f"ERROR: Figma API: {err}", file=sys.stderr)
+       sys.exit(1)
+   images = data.get("images") or {}
+   url = next(iter(images.values()), None) if images else None
+   if not url:
+       print(f"ERROR: Figma API returned no image URL. Response: {json.dumps(data)[:300]}", file=sys.stderr)
+       sys.exit(1)
+   print(url)
+   ')
    if [ -z "$IMG_URL" ] || ! echo "$IMG_URL" | grep -q '^http'; then
-     echo "FATAL: Figma API returned an invalid response. The FIGMA_TOKEN is likely expired or invalid." >&2
-     echo "Fix: (1) Generate a new token at https://www.figma.com/developers/api#access-tokens" >&2
-     echo "     (2) Set it in your environment or .env file" >&2
-     echo "     (3) Re-run the comparison" >&2
+     echo "FATAL: Could not get image URL from Figma (see error above)." >&2
+     echo "Common causes:" >&2
+     echo "  - FIGMA_TOKEN is missing, expired, or invalid" >&2
+     echo "  - The token lacks access to this Figma file" >&2
+     echo "  - The node_id format is wrong (must use ':' not '-', e.g. '1:42' not '1-42')" >&2
+     echo "Fix: Verify token at https://www.figma.com/developers/api#access-tokens and confirm file access." >&2
      exit 1
    fi
    curl -sL -o comparison/figma-screenshot.png "$IMG_URL"
@@ -59,16 +78,13 @@ comparison covering layout, structure, and styling.
    (`1:42`) by replacing `-` with `:`.
 
    **Run this script exactly as written — do not rewrite or simplify it.**
-   The error guard must execute so the user sees actionable fix steps.
+   The error guard must execute so the user sees the actual cause.
 
    **If this command exits non-zero, STOP.** Do not proceed to Phase 2.
    Do not continue without `comparison/figma-screenshot.png` on disk.
-   Report the following to the user and end the comparison:
-
-   > The FIGMA_TOKEN is expired or invalid.
-   > Fix: (1) Generate a new token at https://www.figma.com/developers/api#access-tokens
-   >      (2) Set it in your environment or .env file
-   >      (3) Re-run the comparison
+   Report the script's stderr output verbatim to the user (it names the
+   specific cause — token issue, file access, wrong node ID, etc.) and
+   end the comparison.
 3. Call `mcp__plugin_figma_figma__get_design_context` with
    `forceCode: true` to get the generated code and style tokens.
 4. Extract from the Figma output:
