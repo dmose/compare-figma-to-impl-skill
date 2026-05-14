@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- INSTALL-TESTING.md with Parallels VM setup notes for testing the plugin
+- `claude plugin marketplace remove` command in UNINSTALL.md
+
+### Changed
+- Strengthen report-to-disk enforcement in compare-figma-to-impl skill:
+  make the Write tool call the mandatory final action, suppress full-report
+  conversation output, and cap the inline summary at 5 lines
+- Clarify README setup: add Dev Mode / Share / Copy link instructions for
+  Figma and note that users can specify what to compare and how
+
 ## [0.1.6] - 2026-05-08
 
 ## [0.1.5] - 2026-05-08
