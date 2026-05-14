@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- SubagentStop hook (`hooks/check-report-written.sh`) that blocks the
+  compare-figma-to-impl subagent from stopping until
+  `comparison/report.md` has been written. Scoped to this skill via
+  `agent_type` and subagent transcript inspection; capped at one retry
+  to avoid pathological loops.
+- Stricter eval assertion: `evals/run-eval.sh` now verifies that
+  `comparison/report.md` was actually written during the run (mtime
+  check), not just left over from a prior run.
+
+### Changed
+- Restructure the tail of SKILL.md: the report-write step is now an
+  explicit numbered Phase 7 inside the Workflow section, and the
+  report's content shape lives in a separate top-level "Report Schema"
+  section (previously both were mixed into "Output Format").
+
 ## [0.1.7] - 2026-05-14
 
 ### Added
