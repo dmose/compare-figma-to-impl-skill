@@ -23,6 +23,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   report's content shape lives in a separate top-level "Report Schema"
   section (previously both were mixed into "Output Format").
 
+### Fixed
+- Phase 1's Figma screenshot download now surfaces the actual Figma
+  API error (file inaccessible, wrong node_id format, etc.) instead
+  of always blaming the token. The previous one-liner JSON parser
+  crashed with `KeyError: 'images'` on any non-success response,
+  triggering a misleading "FIGMA_TOKEN is expired" message.
+
 ## [0.1.7] - 2026-05-14
 
 ### Added
