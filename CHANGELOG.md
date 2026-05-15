@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.8] - 2026-05-14
+
 ### Fixed
 - Skill now reliably writes `comparison/report.md` before finishing;
   previously it could silently skip the write under some conditions.
@@ -105,7 +107,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - .env.sample for Figma token configuration
 - Firefox Nightly config and firefox-devtools-mcp integration
 
-[Unreleased]: https://github.com/dmose/compare-figma-to-impl/compare/v0.1.7...HEAD
+[Unreleased]: https://github.com/dmose/compare-figma-to-impl/compare/v0.1.8...HEAD
+[0.1.8]: https://github.com/dmose/compare-figma-to-impl/compare/v0.1.7...v0.1.8
 [0.1.7]: https://github.com/dmose/compare-figma-to-impl/compare/v0.1.6...v0.1.7
 [0.1.6]: https://github.com/dmose/compare-figma-to-impl/compare/v0.1.5...v0.1.6
 [0.1.5]: https://github.com/dmose/compare-figma-to-impl/compare/v0.1.4...v0.1.5
