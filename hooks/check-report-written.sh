@@ -35,7 +35,7 @@ REPORT="${CLAUDE_PROJECT_DIR:-$PWD}/comparison/report.md"
 cat <<'JSON'
 {
   "decision": "block",
-  "reason": "comparison/report.md was not written. Before stopping, use the Write tool to save the full markdown report (using the section headers from the Report Schema in SKILL.md) to comparison/report.md, then run `ls -la comparison/report.md` to verify. Do not stop until that file exists and is non-empty."
+  "reason": "comparison/report.md was not written. Before stopping, save the full markdown report to comparison/report.md using Bash with a single-quoted heredoc (cat > comparison/report.md <<'REPORT_EOF' ... REPORT_EOF), using the section headers from the Report Schema in SKILL.md. Then run `ls -la comparison/report.md` to verify. Do NOT use the Write tool — Claude Code blocks subagent Writes to report files; Bash + heredoc is the working path."
 }
 JSON
 exit 0

@@ -17,9 +17,11 @@ Systematically compare a Figma design to a live Firefox implementation
 using the Figma MCP and Firefox devtools MCP. Produce a structured
 comparison covering layout, structure, and styling.
 
-> **YOUR #1 JOB**: End every successful run by using the **Write** tool
-> to save the report to `comparison/report.md`. See **Phase 7** for the
-> exact steps and **Report Schema** for the content shape.
+> **YOUR #1 JOB**: End every successful run by saving the report to
+> `comparison/report.md` via **Bash** with a single-quoted heredoc.
+> Do NOT use the `Write` tool — Claude Code blocks subagent Writes
+> that look like report files. See **Phase 7** for the exact steps
+> and **Report Schema** for the content shape.
 
 ## Prerequisites
 
@@ -312,10 +314,23 @@ Before presenting results, review the analysis for common errors:
 This is the final step. The deliverable is the file on disk, not the
 conversation text.
 
-1. Use the **Write** tool to save the full markdown report to
-   `comparison/report.md`. The content shape is defined in the
-   **Report Schema** section below. Create the directory first if
-   needed (`mkdir -p comparison`).
+1. Use **Bash** with a single-quoted heredoc to save the full markdown
+   report to `comparison/report.md`. The content shape is defined in
+   the **Report Schema** section below.
+
+   ```bash
+   mkdir -p comparison
+   cat > comparison/report.md <<'REPORT_EOF'
+   # Figma vs. Implementation: <subject>
+   ... full markdown body, following the Report Schema ...
+   REPORT_EOF
+   ```
+
+   The single-quoted delimiter (`<<'REPORT_EOF'`) is required: it
+   prevents shell expansion of backticks, `$`, and backslashes that
+   appear naturally in markdown. **Do NOT use the `Write` tool** —
+   Claude Code blocks subagent Writes that look like report files,
+   and your write will fail.
 2. Run `Bash: ls -la comparison/report.md` as a self-check that the
    file exists.
 3. Reply with a ≤5-sentence summary:

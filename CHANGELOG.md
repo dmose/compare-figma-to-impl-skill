@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- **Successful comparison runs are faster (~1 min) and more
+  reliable.** The skill should now save `comparison/report.md` on
+  the first attempt. Previously every run tripped a Claude Code
+  subagent guardrail on its way to writing the report and relied
+  on the subagent improvising a fallback to recover — slower, and
+  not guaranteed to succeed if a given subagent didn't think to
+  try a different write mechanism.
+- **The `SubagentStop` safety net can now actually rescue runs that
+  would otherwise finish without a report.** Its retry nudge points
+  at a write path Claude Code allows for subagents; previously it
+  pointed at the same blocked path it was meant to recover from.
+
 ## [0.1.8] - 2026-05-14
 
 ### Fixed
