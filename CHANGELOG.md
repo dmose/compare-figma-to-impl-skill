@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.9] - 2026-05-15
+
 ### Fixed
 - **Successful comparison runs are faster (~1 min) and more
   reliable.** The skill should now save `comparison/report.md` on
@@ -120,7 +122,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - .env.sample for Figma token configuration
 - Firefox Nightly config and firefox-devtools-mcp integration
 
-[Unreleased]: https://github.com/dmose/compare-figma-to-impl/compare/v0.1.8...HEAD
+[Unreleased]: https://github.com/dmose/compare-figma-to-impl/compare/v0.1.9...HEAD
+[0.1.9]: https://github.com/dmose/compare-figma-to-impl/compare/v0.1.8...v0.1.9
 [0.1.8]: https://github.com/dmose/compare-figma-to-impl/compare/v0.1.7...v0.1.8
 [0.1.7]: https://github.com/dmose/compare-figma-to-impl/compare/v0.1.6...v0.1.7
 [0.1.6]: https://github.com/dmose/compare-figma-to-impl/compare/v0.1.5...v0.1.6
