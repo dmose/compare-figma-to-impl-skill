@@ -43,4 +43,7 @@ Parallels VM on MacOS Apple Silicon
    ```
    11. Trust the Firefox source folder
    12. Accept the MCP servers from .mcp.json
+5. You now have a development ready-ish) VM
+6. Take a snapshot of the VM so you can always roll basck to it
+   1. From the Host MacOS Parallels Menubar, select Actions > Take a Snapshot
    
